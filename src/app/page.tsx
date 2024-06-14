@@ -14,22 +14,22 @@ export default function Home() {
             <div data-collapse="collapse" className={`${showMenu == true? '': "hidden"} transition-all duration-400 ease-in-out justify-center text-center lg:block bg-black nav-links md:static absolute md:min-h-fit min-h-[100vh]  left-0 top-[15%] md:w-auto  w-full flex items-center px-5`}>
                 <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
                   <li>
-                    <a className="text-2xl lg:text-lg hover:text-red-700" href="#home">Início</a>
+                    <a className="hover:text-red-700" href="#home">Início</a>
                   </li>
                   <li>
-                    <a className="text-2xl lg:text-lg hover:text-red-700" href="#sobre">Conheça o Clube</a>
+                    <a className="hover:text-red-700" href="#sobre">Conheça o Clube</a>
                   </li>
                   <li>
-                      <a className="text-2xl lg:text-lg hover:text-red-700" href="#parceiros">Nossos Parceiros</a>
+                      <a className="hover:text-red-700" href="#parceiros">Nossos Parceiros</a>
                   </li>
                   <li>
-                      <a className="text-2xl lg:text-lg hover:text-red-700" href="#descontos">Descontos</a>
+                      <a className="hover:text-red-700" href="#descontos">Descontos</a>
                   </li>
                   <li>
-                    <button className="text-2xl lg:text-lg bg-red-700 text-white px-10 py-2 rounded-full hover:bg-red-900 mt-2">Ver Descontos</button>
+                    <button className="bg-red-700 text-white px-10 py-2 rounded-full hover:bg-red-900 mt-2">Ver Descontos</button>
                   </li>
                   <li>
-                    <button className="text-2xl lg:text-lg bg-transparent border-2 border-red-700 text-white px-5 py-2 rounded-full hover:bg-red-800 hover:border-white">Área do Associado</button>
+                    <button className="bg-transparent border-2 border-red-700 text-white px-5 py-2 rounded-full hover:bg-red-800 hover:border-white">Área do Associado</button>
                   </li>
                 </ul>
             </div>
