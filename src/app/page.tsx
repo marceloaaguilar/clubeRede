@@ -11,7 +11,7 @@ export default function Home() {
             <div>
               <Image src="/logo_Clube_Rede.png" className="m-5" alt="Logo Clube Rede" width={100} height={50}></Image>  
             </div>
-            <div data-collapse="collapse" className={`${showMenu == true? '': "hidden"} transition-all duration-400 ease-in-out justify-center text-center lg:block bg-black nav-links md:static absolute md:min-h-fit min-h-[100vh]  left-0 top-[25%] md:w-auto  w-full flex items-start px-5`}>
+            <div data-collapse="collapse" className={`${showMenu == true? '': "hidden"} transition-all duration-400 ease-in-out justify-center text-center lg:block bg-black nav-links md:static absolute md:min-h-fit min-h-[100vh]  left-0 top-[15%] md:w-auto  w-full flex items-start px-5`}>
                 <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
                   <li>
                     <a className="hover:text-red-700" href="#home">Início</a>
