@@ -11,7 +11,7 @@ export default function Home() {
             <div>
               <Image src="/logo_Clube_Rede.png" className="m-5" alt="Logo Clube Rede" width={100} height={50}></Image>  
             </div>
-            <div data-collapse="collapse" className={`${showMenu == true? '': "hidden"} transition-all duration-400 ease-in-out justify-center text-center lg:block bg-black nav-links md:static absolute md:min-h-fit min-h-[100vh]  left-0 top-[15%] md:w-auto  w-full flex items-start px-5`}>
+            <div data-collapse="collapse" className={`${showMenu == true? '': "hidden"} transition-all duration-400 ease-in-out justify-center text-center lg:block bg-black nav-links md:static absolute md:min-h-fit min-h-[100vh]  left-0 top-[11%] md:w-auto mt-8 w-full flex items-start px-5`}>
                 <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
                   <li>
                     <a className="hover:text-red-700" href="#home">Início</a>
@@ -45,8 +45,8 @@ export default function Home() {
       <div id="home" className="flex items-center justify-start h-screen" style={{background: "url('/family.jpg')",  width: '100%', objectFit: 'cover',backgroundPosition: '60% 50%',  backgroundRepeat: 'no-repeat'}}>
         <div className="p-6 ml-6">
           <h3 className="text-2xl font-bold">Bem-vindo ao Clube de Descontos Rede Veículos!</h3>
-          <p>Descontos que fazem você acelerar!</p>
-          <button className="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 mt-4 w-1/2">Ver Mais</button>
+          <p className="mb-4">Descontos que fazem você acelerar!</p>
+          <a href="#sobre" className="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-10 w-1/2">Ver Mais</a>
         </div>
       </div>
 
