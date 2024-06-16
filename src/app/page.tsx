@@ -7,23 +7,23 @@ export default function Home() {
   const[showMenu, setShowMenu] = useState(false);
   return (
     <main className="scroll-smooth">
-       <nav className="flex justify-between items-center w-[92%]  mx-auto">
+       <nav className="flex justify-between items-center w-[92%]  bg-black mx-auto">
             <div>
               <Image src="/logo_Clube_Rede.png" className="m-5" alt="Logo Clube Rede" width={100} height={50}></Image>  
             </div>
-            <div data-collapse="collapse" className={`${showMenu == true? '': "hidden"} transition-all duration-400 ease-in-out justify-center text-center lg:block bg-black nav-links md:static absolute md:min-h-fit min-h-[60vh] left-0 top-[14%] md:w-auto  w-full flex items-center px-5`}>
+            <div data-collapse="collapse" className={`${showMenu == true? '': "hidden"} z-10 transition-all duration-400 ease-in-out justify-center text-center lg:block bg-black nav-links md:static absolute md:min-h-fit min-h-[60vh] left-0 top-[14%] md:w-auto  w-full flex items-center px-5 text-white`}>
                 <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
                   <li>
-                    <a className="hover:text-red-700" href="#home">Início</a>
+                    <a className="text-white hover:text-red-700" href="#home">Início</a>
                   </li>
                   <li>
-                    <a className="hover:text-red-700" href="#sobre">Conheça o Clube</a>
+                    <a className="text-white hover:text-red-700" href="#sobre">Conheça o Clube</a>
                   </li>
                   <li>
-                      <a className="hover:text-red-700" href="#parceiros">Nossos Parceiros</a>
+                      <a className="text-white hover:text-red-700" href="#parceiros">Nossos Parceiros</a>
                   </li>
                   <li>
-                      <a className="hover:text-red-700" href="#descontos">Descontos</a>
+                      <a className="text-white hover:text-red-700" href="#descontos">Descontos</a>
                   </li>
                   <li>
                     <button className="bg-red-700 text-white px-10 py-2 rounded-full hover:bg-red-900 mt-2">Ver Descontos</button>
@@ -33,7 +33,7 @@ export default function Home() {
                   </li>
                 </ul>
             </div>
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-6 z-20">
               <button onClick={() => setShowMenu(!showMenu)} type="button" className={`md:hidden inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 focus:text-white rounded-lg`} aria-controls="navbar-default" aria-expanded="false">
                 <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
@@ -42,10 +42,10 @@ export default function Home() {
             </div>
         </nav>
 
-      <div id="home" className="flex items-center justify-start h-screen" style={{background: "url('/family.jpg')",  width: '100%', objectFit: 'cover',backgroundPosition: '60% 50%',  backgroundRepeat: 'no-repeat'}}>
+      <div id="home" className="flex items-center justify-start lg:h-screen h-64" style={{background: "url('/family.jpg')",  width: '100%', objectFit: 'cover',backgroundPosition: '60% 50%',  backgroundRepeat: 'no-repeat'}}>
         <div className="p-6 ml-6">
-          <h3 className="text-2xl font-bold">Bem-vindo ao Clube de Descontos Rede Veículos!</h3>
-          <p className="mb-4">Descontos que fazem você acelerar!</p>
+          <h3 className="text-white text-2xl font-bold">Bem-vindo ao Clube de Descontos Rede Veículos!</h3>
+          <p className="text-white mb-4">Descontos que fazem você acelerar!</p>
           <a href="#sobre" className="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-10 w-1/2">Ver Mais</a>
         </div>
       </div>
@@ -94,24 +94,24 @@ export default function Home() {
       <div id="parceiros" className="flex-col bg-white w-100 mt-4 p-6 h-full text-center">
         <h4 className="text-black text-4xl mt-5">Grandes marcas,<b> grandes descontos</b>!</h4>
         <div className="grid xl:grid-cols-6 gap-4 mt-9 justify-center w-full">
-            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/488.png" alt="logoCineart" width={350} height={350}></Image>
-            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/clubemarisa.jpg" alt="logoCineart" width={350} height={350}></Image>
-            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/ponto_pontofrio.jpg" alt="logoCineart" width={350} height={350}></Image>
-            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/clubeDrogasil.jpg" alt="logoCineart" width={350} height={350}></Image>
-            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/Aliexpress_logo.png" alt="logoCineart" width={350} height={350}></Image>
-            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/clube753.jpg" alt="logoCineart" width={350} height={350}></Image>
-            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/djsnlcisjvisjncisdp.png" alt="logoCineart" width={350} height={350}></Image>
-            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/ligoShoestock.png" alt="logoCineart" width={350} height={350}></Image>
-            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoMovida250x250px.png" alt="logoCineart" width={350} height={350}></Image>
-            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/clube-348.jpg" alt="logoCineart" width={350} height={350}></Image>
-            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/vivara-logo.png" alt="logoCineart" width={350} height={350}></Image>
-            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/clube-422.jpg" alt="logoCineart" width={350} height={350}></Image>
-            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/clubeDrogaRaia.jpg" alt="logoCineart" width={350} height={350}></Image>
-            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/clube-341.jpg" alt="logoCineart" width={350} height={350}></Image>
-            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/clube-casasbahia.png" alt="logoCineart" width={350} height={350}></Image>
-            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/clubemagalu.jpg" alt="logoCineart" width={350} height={350}></Image>
-            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/LogoPetzCBC250x250.png" alt="logoCineart" width={350} height={350}></Image>
-            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/Dominos.jpg" alt="logoCineart" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoRiachuelo.png" alt="Logo da Riachuelo" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/clubemarisa.jpg" alt="Logo da Loja MArisa" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/ponto_pontofrio.jpg" alt="Logo do Ponto" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoSeculos.png" alt="Logo da Loja Seculos" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/Aliexpress_logo.png" alt="Logo do Aliexpress" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/heringLogo.png" alt="Logo da Hering" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/djsnlcisjvisjncisdp.png" alt="Logo Hóteis.com" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/ligoShoestock.png" alt="Logo Shoestock" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoMovida250x250px.png" alt="Logo da Movida" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/clube-348.jpg" alt="Logo da Zattini" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/vivara-logo.png" alt="Logo da Vivara" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/clube-422.jpg" alt="Logo da Centauro" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoEstacio.png" alt="Logo da Estácio" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/clube-341.jpg" alt="Logo Nethoes" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/clube-casasbahia.png" alt="Logo Casas Bahia" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/clubemagalu.jpg" alt="Logo da Magalu" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/LogoPetzCBC250x250.png" alt="Logo da Petz" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/Dominos.jpg" alt="Logo da Dominos" width={350} height={350}></Image>
         </div>
       </div>
 
