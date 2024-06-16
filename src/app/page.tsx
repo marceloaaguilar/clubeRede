@@ -42,7 +42,7 @@ export default function Home() {
             </div>
         </nav>
 
-      <div id="home" className="flex items-center justify-start lg:h-screen h-64" style={{background: "url('/family.jpg')",  width: '100%', objectFit: 'cover',backgroundPosition: '60% 50%',  backgroundRepeat: 'no-repeat'}}>
+      <div id="home" className="flex items-center justify-start w-100 lg:h-screen h-64" style={{background: "url('/family.jpg')",  width: '100%', objectFit: 'cover',backgroundPosition: '70% 50%',  backgroundRepeat: 'no-repeat'}}>
         <div className="p-6 ml-6">
           <h3 className="text-white text-2xl font-bold">Bem-vindo ao Clube de Descontos Rede Veículos!</h3>
           <p className="text-white mb-4">Descontos que fazem você acelerar!</p>
