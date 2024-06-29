@@ -2,6 +2,7 @@
 import Image from "next/image";
 import 'animate.css';
 import { useState } from "react";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const[showMenu, setShowMenu] = useState(false);
@@ -29,7 +30,7 @@ export default function Home() {
                     <button className="bg-red-700 text-white px-10 py-2 rounded-full hover:bg-red-900 mt-2">Ver Descontos</button>
                   </li>
                   <li>
-                    <button className="bg-transparent border-2 border-red-700 text-white px-5 py-2 rounded-full hover:bg-red-800 hover:border-white">Área do Associado</button>
+                    <a href="/login" className="bg-transparent border-2 border-red-700 text-white px-5 py-2 rounded-full hover:bg-red-800 hover:border-white">Área do Associado</a>
                   </li>
                 </ul>
             </div>
@@ -132,11 +133,7 @@ export default function Home() {
             <button className="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 mt-4 w-56">Ver Descontos</button>
           </div>
       </div>
-
-      <div className="flex justify-center text-center gap-10 bg-black items-center h-52" >
-        <Image src="/logo_Clube_Rede.png" alt="Logo Clube Rede" width={100} height={50}></Image>
-        <p>Central de Descontos <br/> 0800 940 2195</p>
-      </div>
+      <Footer/>
     </main>
   );
 }
