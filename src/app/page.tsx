@@ -27,10 +27,7 @@ export default function Home() {
                       <a className="text-white hover:text-red-700" href="#descontos">Descontos</a>
                   </li>
                   <li>
-                    <button className="bg-red-700 text-white px-10 py-2 rounded-full hover:bg-red-900 mt-2">Ver Descontos</button>
-                  </li>
-                  <li>
-                    <a href="/login" className="bg-transparent border-2 border-red-700 text-white px-5 py-2 rounded-full hover:bg-red-800 hover:border-white">Área do Associado</a>
+                    <a href="/login" className="bg-red-700 text-white px-10 py-2 rounded-full hover:bg-red-900 mt-2">Área do Associado</a>
                   </li>
                 </ul>
             </div>
