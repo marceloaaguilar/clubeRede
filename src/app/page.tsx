@@ -1,44 +1,96 @@
 'use client'
 import Image from "next/image";
 import 'animate.css';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "@/components/Footer";
+import { useRouter, useSearchParams } from 'next/navigation'
+const AES = require("crypto-js/aes")
 
+const USER_DATA_HASH_URL_PARAM = 'id'
+
+interface IUserData {
+  cpf: string,
+  password: string,
+  companyName: string
+}
+
+// TODO: Adicionar as variáveis de ambiente NEXT_PUBLIC_SYSTEM_TOKEN e NEXT_PUBLIC_SECRET
 export default function Home() {
   const[showMenu, setShowMenu] = useState(false);
+  const [memberDataHash, setMemeberDataHash] = useState<string | null>(null);
+
+  const searchParams = useSearchParams();
+  const { push } = useRouter();
+
+  const authenticateMember = async ({ cpf, password, companyName}: IUserData): Promise<boolean> => {
+    const response = await fetch('https://api.xpto.com.br/authenticate', {
+      body: JSON.stringify({
+        cpf,
+        password,
+        companyName
+      }),
+      headers: {
+        authorization: process.env.NEXT_PUBLIC_SYSTEM_TOKEN ?? ''
+      },
+      method: 'POST'
+    })
+
+    const responseData = await response.json()
+
+    // TODO: Está considerando que a API está retornando um boolean, ajustar isso após testar endpoint
+    return responseData 
+  }
+
+  const handleMemberAreaButton = async (): Promise<void> => {
+    if (!memberDataHash) alert('Associado inválido.')
+
+    const memberData = AES.decrypt(memberDataHash, process.env.NEXT_PUBLIC_SECRET)
+
+    console.log('memberData:', memberData)
+    // const isMemberAuthenticated = await authenticateMember(memberData)
+
+    // if (isMemberAuthenticated) {
+      push(`associado?${USER_DATA_HASH_URL_PARAM}=${memberDataHash}`)
+    // } else alert('Associado não autenticado.')
+  }
+
+  useEffect(() => { 
+    setMemeberDataHash(searchParams.get(USER_DATA_HASH_URL_PARAM))
+  }, [])
+
   return (
     <main className="scroll-smooth">
-       <nav className="flex justify-between items-center w-[92%]  bg-black mx-auto">
-            <div>
-              <Image src="/logo_Clube_Rede.png" className="m-5" alt="Logo Clube Rede" width={100} height={50}></Image>  
-            </div>
-            <div data-collapse="collapse" className={`${showMenu == true? '': "hidden"} z-10 transition-all duration-400 ease-in-out justify-center text-center lg:block bg-black nav-links md:static absolute md:min-h-fit min-h-[60vh] left-0 top-[14%] md:w-auto  w-full flex items-center px-5 text-white`}>
-                <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
-                  <li>
-                    <a className="text-white hover:text-red-700" href="#home">Início</a>
-                  </li>
-                  <li>
-                    <a className="text-white hover:text-red-700" href="#sobre">Conheça o Clube</a>
-                  </li>
-                  <li>
-                      <a className="text-white hover:text-red-700" href="#parceiros">Nossos Parceiros</a>
-                  </li>
-                  <li>
-                      <a className="text-white hover:text-red-700" href="#descontos">Descontos</a>
-                  </li>
-                  <li>
-                    <a href="/login" className="bg-red-700 text-white px-10 py-2 rounded-full hover:bg-red-900 mt-2">Área do Associado</a>
-                  </li>
-                </ul>
-            </div>
-            <div className="flex items-center gap-6 z-20">
-              <button onClick={() => setShowMenu(!showMenu)} type="button" className={`md:hidden inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 focus:text-white rounded-lg`} aria-controls="navbar-default" aria-expanded="false">
-                <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-                </svg>
-              </button>
-            </div>
-        </nav>
+      <nav className="flex justify-between items-center w-[92%]  bg-black mx-auto">
+        <div>
+          <Image src="/logo_Clube_Rede.png" className="m-5" alt="Logo Clube Rede" width={100} height={50}></Image>  
+        </div>
+        <div data-collapse="collapse" className={`${showMenu == true? '': "hidden"} z-10 transition-all duration-400 ease-in-out justify-center text-center lg:block bg-black nav-links md:static absolute md:min-h-fit min-h-[60vh] left-0 top-[14%] md:w-auto  w-full flex items-center px-5 text-white`}>
+            <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
+              <li>
+                <a className="text-white hover:text-red-700" href="#home">Início</a>
+              </li>
+              <li>
+                <a className="text-white hover:text-red-700" href="#sobre">Conheça o Clube</a>
+              </li>
+              <li>
+                  <a className="text-white hover:text-red-700" href="#parceiros">Nossos Parceiros</a>
+              </li>
+              <li>
+                  <a className="text-white hover:text-red-700" href="#descontos">Descontos</a>
+              </li>
+              <li>
+                <button onClick={() => handleMemberAreaButton()} className="bg-red-700 text-white px-10 py-2 rounded-full hover:bg-red-900 mt-2">Área do Associado</button>
+              </li>
+            </ul>
+        </div>
+        <div className="flex items-center gap-6 z-20">
+          <button onClick={() => setShowMenu(!showMenu)} type="button" className={`md:hidden inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 focus:text-white rounded-lg`} aria-controls="navbar-default" aria-expanded="false">
+            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+            </svg>
+          </button>
+        </div>
+      </nav>
 
       <div id="home" className="flex items-center justify-start w-100 lg:h-screen h-64" style={{background: "url('/family.jpg')",  width: '100%', objectFit: 'cover',backgroundPosition: '70% 50%',  backgroundRepeat: 'no-repeat'}}>
         <div className="p-6 ml-6">
