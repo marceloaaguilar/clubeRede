@@ -3,4 +3,6 @@ export interface Empresa{
     categoria: string,
     nome: string
     logo: string,
+    link?: string,
+    palavrasChave: string
 }

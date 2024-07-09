@@ -13,6 +13,8 @@
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
+    "react-slick": "^0.30.2",
+    "slick-carousel": "^1.8.1",
     "wow.js": "^1.2.2",
     "wowjs": "^1.1.3"
   },
