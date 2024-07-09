@@ -78,7 +78,7 @@ export default function Home() {
             </div>
         </nav>
 
-        <div id="home" className="relative flex items-center justify-start lg:h-screen h-64" style={{background: "url('/family.jpg')",  width: '100%', objectFit: 'cover', backgroundPosition: '70% 50%', backgroundRepeat: 'no-repeat'}}>
+        <div id="home" className="relative flex items-center justify-start lg:h-screen h-72" style={{background: "url('/family.jpg')",  width: '100%', objectFit: 'cover', backgroundPosition: '70% 50%', backgroundRepeat: 'no-repeat'}}>
           <style>
             {`
             @keyframes slideBackground {
@@ -93,7 +93,7 @@ export default function Home() {
             `}
           </style>
           <div className="absolute inset-0 bg-black opacity-50"></div> {/* Overlay para melhor legibilidade do texto */}
-          <div className="relative z-10 p-6 ml-6 text-left text-white">
+          <div className="relative p-6 ml-6 text-left text-white">
             <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Bem-vindo ao Clube de Descontos Rede Veículos!</h3>
             <p className="text-lg md:text-xl mb-6">Descontos que fazem você acelerar!</p>
             <a href="#sobre" className="bg-red-500 hover:bg-red-800 text-white font-bold py-3 px-12 rounded-lg shadow-lg transition duration-300">Descubra Mais</a>

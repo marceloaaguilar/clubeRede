@@ -2,33 +2,44 @@
 'use client'
 import { useState } from "react";
 import Image from "next/image";
+import { motion, AnimatePresence } from 'framer-motion';
 
 
 export default function Navbar(){
   const[showMenu, setShowMenu] = useState(false);
 
   return (
-    <nav className="flex justify-between items-center w-[92%]  bg-black mx-auto">
+    <nav className="fixed top-0 left-0 w-full bg-black z-50 px-4 py-2 md:px-8 flex justify-between items-center">
       <div>
-        <Image src="/logo_Clube_Rede.png" className="m-5" alt="Logo Clube Rede" width={100} height={50}></Image>  
+        <Image src="/logo_Clube_Rede.png" alt="Logo Clube Rede" width={100} height={50} />
       </div>
-      <div data-collapse="collapse" className={`${showMenu == true? '': "hidden"} z-10 transition-all duration-400 ease-in-out justify-center text-center lg:block bg-black nav-links md:static absolute md:min-h-fit min-h-[60vh] left-0 top-[14%] md:w-auto  w-full flex items-center px-5 text-white`}>
-          <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
-            <li>
-              <a className="text-white hover:text-red-700" href="#home">Início</a>
-            </li>
-            <li>
-              <a className="text-white hover:text-red-700" href="#descontos">Descontos</a>
-            </li>
-          </ul>
-      </div>
-      <div className="flex items-center gap-6 z-20">
-        <button onClick={() => setShowMenu(!showMenu)} type="button" className={`md:hidden inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 focus:text-white rounded-lg`} aria-controls="navbar-default" aria-expanded="false">
-          <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+      <div className="md:hidden">
+        <button onClick={() => setShowMenu(!showMenu)} type="button" className="inline-flex items-center justify-center p-2 text-gray-500 rounded-lg focus:text-white focus:outline-none">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
           </svg>
         </button>
       </div>
+      <AnimatePresence>
+        {showMenu && (
+          <motion.div
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ duration: 0.3 }}
+            className="fixed top-0 left-0 w-full h-full z-40 flex flex-col items-center justify-center bg-black bg-opacity-90 md:relative md:flex md:flex-row md:items-center md:bg-transparent md:w-auto md:min-h-fit md:z-auto"
+          >
+            <ul className="flex flex-col items-center gap-8 md:flex-row md:gap-6">
+              <li>
+                <a className="text-white hover:text-red-700" href="#home">Início</a>
+              </li>
+              <li>
+                <a className="text-white hover:text-red-700" href="#descontos">Descontos</a>
+              </li>
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
- )   
-}
+  );
+};
