@@ -6,10 +6,15 @@ import Footer from "@/components/Footer";
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { motion, AnimatePresence } from 'framer-motion';
 
 
 export default function Home() {
   const[showMenu, setShowMenu] = useState(false);
+  const handleCloseMenu = () => {
+    setShowMenu(false);
+  };
+
   const settings = {
     dots: true,
     infinite: true,
@@ -46,36 +51,77 @@ export default function Home() {
 
   return (
     <main className="scroll-smooth">
-       <nav className="flex justify-between items-center w-[92%]  bg-black mx-auto">
-            <div>
-              <Image src="/logo_Clube_Rede.png" className="m-5" alt="Logo Clube Rede" width={100} height={50}></Image>  
-            </div>
-            <div data-collapse="collapse" className={`${showMenu == true? '': "hidden"} z-10 transition-all duration-400 ease-in-out justify-center text-center lg:block bg-black nav-links md:static absolute md:min-h-fit min-h-[60vh] left-0 top-[14%] md:w-auto  w-full flex items-center px-5 text-white`}>
-                <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
-                  <li>
-                    <a className="text-white hover:text-red-700" href="#home">Início</a>
-                  </li>
-                  <li>
-                    <a className="text-white hover:text-red-700" href="#sobre">Conheça o Clube</a>
-                  </li>
-                  <li>
+        <nav className="top-0 left-0 w-full bg-black z-50 px-4 py-2 md:px-8 flex justify-between items-center">
+          <div>
+            <Image src="/logo_Clube_Rede.png" className="m-5" alt="Logo Clube Rede" width={100} height={50} />
+          </div>
+          <div className="flex items-center gap-6 z-20">
+            <button
+              onClick={() => setShowMenu(!showMenu)}
+              type="button"
+              className="md:hidden inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 focus:text-white rounded-lg"
+              aria-controls="navbar-default"
+              aria-expanded="false"
+            >
+              <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
+              </svg>
+            </button>
+          </div>
+          <div className="hidden md:flex md:items-center md:gap-[4vw] md:text-white md:text-center">
+            <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
+              <li>
+                <a className="text-white hover:text-red-700" href="#home">Início</a>
+              </li>
+              <li>
+                <a className="text-white hover:text-red-700" href="#sobre">Conheça o Clube</a>
+              </li>
+              <li>
+                <a className="text-white hover:text-red-700" href="#parceiros">Nossos Parceiros</a>
+              </li>
+              <li>
+                <a className="text-white hover:text-red-700" href="#descontos">Descontos</a>
+              </li>
+              <li>
+                <a href="/login" className="bg-red-700 text-white px-10 py-2 rounded-full hover:bg-red-900 mt-2">Área do Associado</a>
+              </li>
+            </ul>
+          </div>
+          <AnimatePresence>
+            {showMenu && (
+              <>
+                <motion.div
+                  initial={{ opacity: 0, x: '100%' }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: '100%' }}
+                  transition={{ duration: 0.3 }}
+                  className="fixed top-0 left-0 w-full h-full z-40 flex flex-col items-center justify-center bg-black bg-opacity-90 md:hidden"
+                >
+                  <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8" onClick={handleCloseMenu}>
+                    <li>
+                      <a className="text-white hover:text-red-700" href="#home">Início</a>
+                    </li>
+                    <li>
+                      <a className="text-white hover:text-red-700" href="#sobre">Conheça o Clube</a>
+                    </li>
+                    <li>
                       <a className="text-white hover:text-red-700" href="#parceiros">Nossos Parceiros</a>
-                  </li>
-                  <li>
+                    </li>
+                    <li>
                       <a className="text-white hover:text-red-700" href="#descontos">Descontos</a>
-                  </li>
-                  <li>
-                    <a href="/login" className="bg-red-700 text-white px-10 py-2 rounded-full hover:bg-red-900 mt-2">Área do Associado</a>
-                  </li>
-                </ul>
-            </div>
-            <div className="flex items-center gap-6 z-20">
-              <button onClick={() => setShowMenu(!showMenu)} type="button" className={`md:hidden inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 focus:text-white rounded-lg`} aria-controls="navbar-default" aria-expanded="false">
-                <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-                </svg>
-              </button>
-            </div>
+                    </li>
+                    <li>
+                      <a href="/login" className="bg-red-700 text-white px-10 py-2 rounded-full hover:bg-red-900 mt-2">Área do Associado</a>
+                    </li>
+                  </ul>
+                </motion.div>
+                <div
+                  className="fixed top-0 left-0 w-full h-full z-30 bg-black bg-opacity-50 md:hidden"
+                  onClick={handleCloseMenu}
+                ></div>
+              </>
+            )}
+          </AnimatePresence>
         </nav>
 
         <div id="home" className="relative flex items-center justify-start lg:h-screen h-72" style={{background: "url('/family.jpg')",  width: '100%', objectFit: 'cover', backgroundPosition: '70% 50%', backgroundRepeat: 'no-repeat'}}>
