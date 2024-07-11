@@ -49,7 +49,7 @@ export default function Discounts(){
                 {id: 5, nome: "AliExpress", categoria: "Ecommerce", logo: "/Aliexpress_logo.png", palavrasChave: "china, ecommerce, aliexpress"},
                 {id: 6, nome: "Hering", categoria: "Roupas", logo: "/heringLogo.png", palavrasChave: "roupas,hering,moda"},
                 {id: 7, nome: "Hóteis", categoria: "Hoteis", logo: "/djsnlcisjvisjncisdp.png", palavrasChave: "hóteis, rede de hoteis, hoteis.com"},
-                {id: 8, nome: "Shoestock", categoria: "Tênis", logo: "/ligoShoestock.png", palavrasChave: "tenis,calçados,shoestock"},
+                {id: 8, nome: "Shoestock", categoria: "Tênis", logo: "/ligoShoestock.png", palavrasChave: "tenis,calçados,shoestock", link: "https://shoestock.parcerialink.com.br/cluberede"},
                 {id: 9, nome: "Movida", categoria: "AluguelCarros", logo: "/logoMovida250x250px.png", palavrasChave: "aluguel de carros,movida,carros", link: "https://movida.parcerialink.com.br/cluberede"},
                 {id: 10, nome: "Zattini", categoria: "Roupas", logo: "/clube-348.jpg", palavrasChave: "roupas,zattini,moda", link: "https://zattini.parcerialink.com.br/cluberede"},
                 {id: 11, nome: "Vivara", categoria: "Joias", logo: "/vivara-logo.png", palavrasChave: "joias,vivara,pulseiras", link: "https://vivara.parcerialink.com.br/cluberede"},
@@ -59,7 +59,13 @@ export default function Discounts(){
                 {id: 15, nome: "Casas Bahia", categoria: "Eletrodomesticos", logo: "/clube-casasbahia.png", palavrasChave: "eletrodomésticos, casas bahia", link: "https://casasbahia.parcerialink.com.br/cluberede"},
                 {id: 16, nome: "Magalu", categoria: "Eletrodomesticos", logo: "/clubemagalu.jpg", palavrasChave: "eletrodomésticos, magalu, magazine luiza"},
                 {id: 17, nome: "Petz", categoria: "Petshop", logo: "/LogoPetzCBC250x250.png", palavrasChave: "petshop, cachorro, gato, petz"},
-                {id: 18, nome: "Dominos", categoria: "Pizzaria", logo: "/Dominos.jpg", palavrasChave: "pizzaria, pizza, comida, dominos"}
+                {id: 18, nome: "Dominos", categoria: "Pizzaria", logo: "/Dominos.jpg", palavrasChave: "pizzaria, pizza, comida, dominos"},
+                {id: 19, nome: "Extra", categoria: "Hipermercado", logo: "/logo-extra.png", palavrasChave: "extra, hipermercado", link: "https://extra.parcerialink.com.br/cluberede"},
+                {id: 20, nome: "Underarmour", categoria: "Roupas", logo: "/logo-underarmor.png", palavrasChave: "roupas, esportes, underarmour", link: "https://underarmour.parcerialink.com.br/cluberede"},
+                {id: 21, nome: "Mizuno", categoria: "Roupas", logo: "/logo-mizuno.png", palavrasChave: "roupas, esportes, mizuno", link: "https://mizuno.parcerialink.com.br/cluberede"},
+                {id: 22, nome: "Olympikus", categoria: "Roupas", logo: "/logo-olympikus.png", palavrasChave: "roupas, esportes, olympikus", link: "https://olympikus.parcerialink.com.br/cluberede"},
+                {id: 23, nome: "Klabin For You", categoria: "Embalagens", logo: "/logo-klabin-for-you.png", palavrasChave: "embalagens, empresa, klabin for you", link: "https://klabinforyou.parcerialink.com.br/cluberede"},
+                {id: 24, nome: "Studio Geek", categoria: "Roupas", logo: "/logo-studio-geek.png", palavrasChave: "roupas, geek, studio geek", link: "https://studiogeek.parcerialink.com.br/cluberede"},
             ]
                 
             
@@ -89,6 +95,7 @@ export default function Discounts(){
                         <option value="Faculdade">Faculdades</option>
                         <option value="Petshop">Pet Shop</option>
                         <option value="Pizzaria">Pizzaria</option>
+                        <option value="Embalagens">Embalagens</option>
                     </select>
                 </div>
                 <button onClick={handleSearch} className="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded w-full mt-4">Buscar</button>

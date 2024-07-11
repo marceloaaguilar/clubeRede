@@ -50,7 +50,7 @@ export default function Home() {
 
 
   return (
-    <main className="scroll-smooth">
+    <main className="scroll-smooth font-sans">
         <nav className="top-0 left-0 w-full bg-black z-50 px-4 py-2 md:px-8 flex justify-between items-center">
           <div>
             <Image src="/logo_Clube_Rede.png" className="m-5" alt="Logo Clube Rede" width={100} height={50} />
@@ -140,7 +140,7 @@ export default function Home() {
           </style>
           <div className="absolute inset-0 bg-black opacity-50"></div> {/* Overlay para melhor legibilidade do texto */}
           <div className="relative p-6 ml-6 text-left text-white">
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Bem-vindo ao Clube de Descontos Rede Veículos!</h3>
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 ">Bem-vindo ao Clube de Descontos Rede Veículos!</h3>
             <p className="text-lg md:text-xl mb-6">Descontos que fazem você acelerar!</p>
             <a href="#sobre" className="bg-red-500 hover:bg-red-800 text-white font-bold py-3 px-12 rounded-lg shadow-lg transition duration-300">Descubra Mais</a>
           </div>
@@ -228,11 +228,6 @@ export default function Home() {
               </div>
             ))}
           </Slider>
-          <div className="mt-10">
-            <button className="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full transition-all duration-300 transform hover:scale-105">
-              Ver Descontos
-            </button>
-          </div>
         </div>
       </div>
 
