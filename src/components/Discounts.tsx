@@ -41,6 +41,27 @@ export default function Discounts() {
     }
   }
 
+  const checkIfIsMemberAuthenticated = async (memberDataHash: string | null): Promise<void> => {
+    try {
+      if (!memberDataHash) {
+        push('/')
+        return
+      }
+
+      const memberData = JSON.parse(AES.decrypt(memberDataHash, process.env.NEXT_PUBLIC_SECRET).toString(CryptoJS.enc.Utf8) ?? '')
+
+      const isMemberAuthenticated = await authenticateMember(memberData.cpfCnpjCliente as string, memberData.token as string)
+
+      if (!isMemberAuthenticated) {
+        push('/')
+        return
+      }
+    } catch (error) {
+      alert('Associado não autenticado.')
+      push('/')
+    }
+  }
+
   const handleSearch = async (e: any) => {
     if (palavraChave !== undefined) {
       setEmpresas(listaEmpresas.filter((empresas) => empresas.palavrasChave?.includes(palavraChave.toLowerCase())))
@@ -57,25 +78,6 @@ export default function Discounts() {
       setEmpresas(listaEmpresas)
     }
 
-  }
-
-  const checkIfIsMemberAuthenticated = async (memberDataHash: string | null): Promise<void> => {
-    try {
-      if (!memberDataHash) {
-        push('/')
-      }
-
-      const memberData = JSON.parse(AES.decrypt(memberDataHash, process.env.NEXT_PUBLIC_SECRET).toString(CryptoJS.enc.Utf8) ?? '')
-
-      const isMemberAuthenticated = await authenticateMember(memberData.cpfCnpjCliente as string, memberData.token as string)
-
-      if (!isMemberAuthenticated) {
-        push('/')
-      }
-    } catch (error) {
-      alert('Associado não autenticado.')
-      push('/')
-    }
   }
 
   const buscaEmpresas = async () => {
