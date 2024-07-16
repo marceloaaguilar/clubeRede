@@ -5,16 +5,16 @@ import { useEffect, useState } from "react";
 import Footer from "@/components/Footer";
 import { useRouter, useSearchParams } from 'next/navigation'
 const AES = require("crypto-js/aes")
+const CryptoJS = require("crypto-js")
 
-const USER_DATA_HASH_URL_PARAM = 'id'
+const MEMBER_DATA_HASH_URL_PARAM = 'id'
 
-interface IUserData {
+interface IMemberData {
   cpf: string,
   password: string,
   companyName: string
 }
 
-// TODO: Adicionar as variáveis de ambiente NEXT_PUBLIC_SYSTEM_TOKEN e NEXT_PUBLIC_SECRET
 export default function Home() {
   const[showMenu, setShowMenu] = useState(false);
   const [memberDataHash, setMemeberDataHash] = useState<string | null>(null);
@@ -22,40 +22,49 @@ export default function Home() {
   const searchParams = useSearchParams();
   const { push } = useRouter();
 
-  const authenticateMember = async ({ cpf, password, companyName}: IUserData): Promise<boolean> => {
-    const response = await fetch('https://api.xpto.com.br/authenticate', {
-      body: JSON.stringify({
-        cpf,
-        password,
-        companyName
-      }),
-      headers: {
-        authorization: process.env.NEXT_PUBLIC_SYSTEM_TOKEN ?? ''
-      },
-      method: 'POST'
-    })
+  const authenticateMember = async (cpf: string, token: string): Promise<boolean> => {
+    try {
+      const formdata = new FormData()
+      formdata.append('json', `{"cpfCnpjCliente": ${cpf}}`)
 
-    const responseData = await response.json()
+      const response = await fetch('https://integracao.redeveiculos.com/api/v2/prod/obterStatusLogin/', {
+        body: formdata,
+        headers: {
+          authorization: token,
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        method: 'POST'
+      })
 
-    // TODO: Está considerando que a API está retornando um boolean, ajustar isso após testar endpoint
-    return responseData 
+      const responseData = await response.json()
+      console.log('resposta da api', responseData)
+
+      return responseData.message === 'OK'
+    } catch (error) {
+      console.log(error)
+      return false
+    }
   }
 
   const handleMemberAreaButton = async (): Promise<void> => {
     if (!memberDataHash) alert('Associado inválido.')
 
-    const memberData = AES.decrypt(memberDataHash, process.env.NEXT_PUBLIC_SECRET)
+    console.log('memberDataHash:', memberDataHash)
+
+    const memberData = AES.decrypt(memberDataHash, process.env.NEXT_PUBLIC_SECRET).toString(CryptoJS.enc.Utf8)
 
     console.log('memberData:', memberData)
-    // const isMemberAuthenticated = await authenticateMember(memberData)
 
-    // if (isMemberAuthenticated) {
-      push(`associado?${USER_DATA_HASH_URL_PARAM}=${memberDataHash}`)
-    // } else alert('Associado não autenticado.')
+    const isMemberAuthenticated = await authenticateMember(memberData.cpfCnpjCliente as string, memberData.token as string)
+
+    if (isMemberAuthenticated) {
+      push(`associado?${MEMBER_DATA_HASH_URL_PARAM}=${memberDataHash}`)
+    } else alert('Associado não autenticado.')
   }
 
-  useEffect(() => { 
-    setMemeberDataHash(searchParams.get(USER_DATA_HASH_URL_PARAM))
+  useEffect(() => {
+    const memberDataHashParamValue = searchParams.get(MEMBER_DATA_HASH_URL_PARAM)
+    setMemeberDataHash(memberDataHashParamValue ? memberDataHashParamValue.replaceAll(' ', '+') : null)
   }, [])
 
   return (
