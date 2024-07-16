@@ -9,12 +9,6 @@ const CryptoJS = require("crypto-js")
 
 const MEMBER_DATA_HASH_URL_PARAM = 'id'
 
-interface IMemberData {
-  cpf: string,
-  password: string,
-  companyName: string
-}
-
 export default function Home() {
   const[showMenu, setShowMenu] = useState(false);
   const [memberDataHash, setMemeberDataHash] = useState<string | null>(null);
@@ -24,20 +18,18 @@ export default function Home() {
 
   const authenticateMember = async (cpf: string, token: string): Promise<boolean> => {
     try {
-      const formdata = new FormData()
-      formdata.append('json', `{"cpfCnpjCliente": ${cpf}}`)
-
+      const payload = { cpfCnpjCliente: cpf }
       const response = await fetch('https://integracao.redeveiculos.com/api/v2/prod/obterStatusLogin/', {
-        body: formdata,
+        body: new URLSearchParams({ json: JSON.stringify(payload) }),
         headers: {
-          authorization: token,
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/json',
           'Content-Type': 'application/x-www-form-urlencoded'
         },
         method: 'POST'
       })
 
       const responseData = await response.json()
-      console.log('resposta da api', responseData)
 
       return responseData.message === 'OK'
     } catch (error) {
@@ -47,19 +39,19 @@ export default function Home() {
   }
 
   const handleMemberAreaButton = async (): Promise<void> => {
-    if (!memberDataHash) alert('Associado inválido.')
+    try {
+      if (!memberDataHash) alert('Associado inválido.')
+        
+      const memberData = JSON.parse(AES.decrypt(memberDataHash, process.env.NEXT_PUBLIC_SECRET).toString(CryptoJS.enc.Utf8) ?? '')
 
-    console.log('memberDataHash:', memberDataHash)
+      const isMemberAuthenticated = await authenticateMember(memberData.cpfCnpjCliente as string, memberData.token as string)
 
-    const memberData = AES.decrypt(memberDataHash, process.env.NEXT_PUBLIC_SECRET).toString(CryptoJS.enc.Utf8)
-
-    console.log('memberData:', memberData)
-
-    const isMemberAuthenticated = await authenticateMember(memberData.cpfCnpjCliente as string, memberData.token as string)
-
-    if (isMemberAuthenticated) {
-      push(`associado?${MEMBER_DATA_HASH_URL_PARAM}=${memberDataHash}`)
-    } else alert('Associado não autenticado.')
+      if (isMemberAuthenticated) {
+        push(`associado?${MEMBER_DATA_HASH_URL_PARAM}=${memberDataHash}`)
+      } else alert('Associado não autenticado.')
+    } catch (error) {
+      alert('Associado não autenticado.')
+    }
   }
 
   useEffect(() => {
