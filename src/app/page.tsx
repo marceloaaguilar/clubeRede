@@ -188,71 +188,25 @@ export default function Home() {
       <div id="parceiros" className="flex-col bg-white w-100 p-6 h-full text-center">
         <h4 className="text-black text-4xl mt-5">Grandes marcas,<b> grandes descontos</b>!</h4>
         <div className="grid xl:grid-cols-6 gap-4 mt-9 justify-center w-full">
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoRiachuelo.png" alt="Logo da Riachuelo" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/clubemarisa.jpg" alt="Logo da Loja Marisa" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/ponto_pontofrio.jpg" alt="Logo do Ponto" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoSeculos.png" alt="Logo da Loja Seculos" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/Aliexpress_logo.png" alt="Logo do Aliexpress" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/heringLogo.png" alt="Logo da Hering" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/djsnlcisjvisjncisdp.png" alt="Logo Hóteis.com" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/ligoShoestock.png" alt="Logo Shoestock" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoMovida250x250px.png" alt="Logo da Movida" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/clube-348.jpg" alt="Logo da Zattini" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/vivara-logo.png" alt="Logo da Vivara" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/clube-422.jpg" alt="Logo da Centauro" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoEstacio.png" alt="Logo da Estácio" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/clube-341.jpg" alt="Logo Netshoes" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/clube-casasbahia.png" alt="Logo Casas Bahia" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/clubemagalu.jpg" alt="Logo da Magalu" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/LogoPetzCBC250x250.png" alt="Logo da Petz" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/Dominos.jpg" alt="Logo da Dominos" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoAtlas.png" alt="Logo da Atlas" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoBabyAndMe.png" alt="Logo da Baby And Me" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoCanon.png" alt="Logo da Canon" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoCestasMichelli.png" alt="Logo da Cestas Michelli" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoClubeDoMalte.png" alt="Logo da Clube do Malte" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoCompraCerta.png" alt="Logo da Compra Certa" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoDafiti.png" alt="Logo da Dafiti" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoDrogaoNet.png" alt="Logo da Drogão Net" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoDrogariaSaoPaulo.png" alt="Logo da Drogaria São Paulo" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoEnglishFluency.png" alt="Logo da English Fluency" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoEvino.png" alt="Logo da Evino" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoFila.png" alt="Logo da Fila" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoGiulianaFlores.png" alt="Logo da Giuliana Flores" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoGocase.png" alt="Logo da Gocase" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoHope.png" alt="Logo da Hope" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoIkesaki.png" alt="Logo da Ikesaki" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoJequiti.png" alt="Logo da Jequiti" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoKaspersky.png" alt="Logo da Kaspersky" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoLoccitane.png" alt="Logo da L'Occitane" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoLoccitaneEnProvence.png" alt="Logo da L'Occitane En Provence" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoLivUp.png" alt="Logo da Liv Up" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoMarcyn.png" alt="Logo da Marcyn" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoMultilaser.png" alt="Logo da Multilaser" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoNatura.png" alt="Logo da Natura" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoNovaFlor.png" alt="Logo da Nova Flor" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoOBoticario.png" alt="Logo da O Boticário" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoOceane.png" alt="Logo da Océane" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoOldflix.png" alt="Logo da Oldflix" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoPanasonic.png" alt="Logo da Panasonic" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoPenalty.png" alt="Logo da Penalty" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoPhilips.png" alt="Logo da Philips" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoPneuStore.png" alt="Logo da PneuStore" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoPuket.png" alt="Logo da Puket" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoSalonLine.png" alt="Logo da Salon Line" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoSemParar.png" alt="Logo da Sem Parar" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoSephora.png" alt="Logo da Sephora" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoShopClubElectrolux.png" alt="Logo da Shop Club Electrolux" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoShopee.png" alt="Logo da Shopee" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoTheNorthFace.png" alt="Logo da The North Face" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoTokStok.png" alt="Logo da Tok&Stok" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoTravelex.png" alt="Logo da Travelex" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoUmbro.png" alt="Logo da Umbro" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoWalita.png" alt="Logo da Walita" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoWebfones.png" alt="Logo da Webfones" width={350} height={350}></Image>
-          <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoBuser.png" alt="Logo da Buser" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoRiachuelo.png" alt="Logo da Riachuelo" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/clubemarisa.jpg" alt="Logo da Loja MArisa" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/ponto_pontofrio.jpg" alt="Logo do Ponto" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoSeculos.png" alt="Logo da Loja Seculos" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/Aliexpress_logo.png" alt="Logo do Aliexpress" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/heringLogo.png" alt="Logo da Hering" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/djsnlcisjvisjncisdp.png" alt="Logo Hóteis.com" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/ligoShoestock.png" alt="Logo Shoestock" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoMovida250x250px.png" alt="Logo da Movida" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/clube-348.jpg" alt="Logo da Zattini" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/vivara-logo.png" alt="Logo da Vivara" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/clube-422.jpg" alt="Logo da Centauro" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/logoEstacio.png" alt="Logo da Estácio" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/clube-341.jpg" alt="Logo Nethoes" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/clube-casasbahia.png" alt="Logo Casas Bahia" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/clubemagalu.jpg" alt="Logo da Magalu" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/LogoPetzCBC250x250.png" alt="Logo da Petz" width={350} height={350}></Image>
+            <Image className="hover:p-3  transition-all w-48 h-48 object-contain" src="/Dominos.jpg" alt="Logo da Dominos" width={350} height={350}></Image>
         </div>
-
       </div>
       
       <div id="descontos" className="flex flex-col bg-zinc-100 pb-10">
