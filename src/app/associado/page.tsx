@@ -4,7 +4,7 @@ import Footer from "@/components/Footer"
 
 export default function Associado(){
   return (
-    <div>
+    <div className="font-sans">
       <Navbar/>
       <Discounts/>
       <Footer/>
