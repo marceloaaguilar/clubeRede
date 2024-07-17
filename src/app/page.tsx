@@ -43,6 +43,8 @@ export default function Home() {
   }
 
   const handleMemberAreaButton = async (): Promise<void> => {
+    push('associado');
+    return
     try {
       if (!memberDataHash) {
         alert('Associado inválido.')
@@ -99,10 +101,10 @@ export default function Home() {
     { src: '/shopping.jpg', alt: 'Compras', text: 'Super Descontos em Lojas' },
   ];
 
-  useEffect(() => {
-    const memberDataHashParamValue = searchParams.get(MEMBER_DATA_HASH_URL_PARAM)
-    setMemeberDataHash(memberDataHashParamValue ? memberDataHashParamValue.replaceAll(' ', '+') : null)
-  }, [])
+  // useEffect(() => {
+  //   const memberDataHashParamValue = searchParams.get(MEMBER_DATA_HASH_URL_PARAM)
+  //   setMemeberDataHash(memberDataHashParamValue ? memberDataHashParamValue.replaceAll(' ', '+') : null)
+  // }, [])
 
   return (
     <main className="scroll-smooth font-sans">
@@ -195,8 +197,8 @@ export default function Home() {
           </style>
           <div className="absolute inset-0 bg-black opacity-50"></div> {/* Overlay para melhor legibilidade do texto */}
           <div className="relative p-6 ml-6 text-left text-white">
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 ">Bem-vindo ao Clube Rede</h3>
-            <p className="text-lg md:text-xl mb-6">Sua rede de descontos</p>
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 ">Bem-vindo ao Clube Rede. <br/> Sua rede de descontos</h3>
+            <p className="text-lg md:text-xl mb-6">Aqui sua economia está garantida!</p>
             <a href="#sobre" className="bg-red-500 hover:bg-red-800 text-white font-bold py-3 px-12 rounded-lg shadow-lg transition duration-300">Descubra Mais</a>
           </div>
         </div>

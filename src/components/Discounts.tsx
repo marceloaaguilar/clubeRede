@@ -158,10 +158,10 @@ export default function Discounts() {
     )
   }
 
-  useEffect(() => {
-    const memberDataHashParamValue = searchParams.get(MEMBER_DATA_HASH_URL_PARAM)
-    checkIfIsMemberAuthenticated(memberDataHashParamValue ? memberDataHashParamValue.replaceAll(' ', '+') : null)
-  }, [])
+  // useEffect(() => {
+  //   const memberDataHashParamValue = searchParams.get(MEMBER_DATA_HASH_URL_PARAM)
+  //   checkIfIsMemberAuthenticated(memberDataHashParamValue ? memberDataHashParamValue.replaceAll(' ', '+') : null)
+  // }, [])
 
   useEffect(() => {
     buscaEmpresas()
