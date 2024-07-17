@@ -1,16 +1,69 @@
 'use client'
 import Image from "next/image";
 import 'animate.css';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "@/components/Footer";
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useRouter, useSearchParams } from 'next/navigation'
+const AES = require("crypto-js/aes")
+const CryptoJS = require("crypto-js")
 
+const MEMBER_DATA_HASH_URL_PARAM = 'id'
 
 export default function Home() {
   const[showMenu, setShowMenu] = useState(false);
+  const [memberDataHash, setMemeberDataHash] = useState<string | null>(null);
+
+  const searchParams = useSearchParams();
+  const { push } = useRouter();
+
+  const authenticateMember = async (cpf: string, token: string): Promise<boolean> => {
+    try {
+      const payload = { cpfCnpjCliente: cpf }
+      const response = await fetch('https://integracao.redeveiculos.com/api/v2/prod/obterStatusLogin/', {
+        body: new URLSearchParams({ json: JSON.stringify(payload) }),
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        method: 'POST'
+      })
+
+      const responseData = await response.json()
+
+      return responseData.message === 'OK'
+    } catch (error) {
+      console.log(error)
+      return false
+    }
+  }
+
+  const handleMemberAreaButton = async (): Promise<void> => {
+    try {
+      if (!memberDataHash) {
+        alert('Associado inválido.')
+        return
+      }
+
+      const memberData = JSON.parse(AES.decrypt(memberDataHash, process.env.NEXT_PUBLIC_SECRET).toString(CryptoJS.enc.Utf8) ?? '')
+
+      const isMemberAuthenticated = await authenticateMember(memberData.cpfCnpjCliente as string, memberData.token as string)
+
+      if (isMemberAuthenticated) {
+        push(`associado?${MEMBER_DATA_HASH_URL_PARAM}=${memberDataHash}`)
+      } else {
+        alert('Associado não autenticado.')
+        return
+      }
+    } catch (error) {
+      alert('Associado não autenticado.')
+    }
+  }
+
   const handleCloseMenu = () => {
     setShowMenu(false);
   };
@@ -46,8 +99,10 @@ export default function Home() {
     { src: '/shopping.jpg', alt: 'Compras', text: 'Super Descontos em Lojas' },
   ];
 
-
-
+  useEffect(() => {
+    const memberDataHashParamValue = searchParams.get(MEMBER_DATA_HASH_URL_PARAM)
+    setMemeberDataHash(memberDataHashParamValue ? memberDataHashParamValue.replaceAll(' ', '+') : null)
+  }, [])
 
   return (
     <main className="scroll-smooth font-sans">
@@ -83,7 +138,7 @@ export default function Home() {
                 <a className="text-white hover:text-red-700" href="#descontos">Descontos</a>
               </li>
               <li>
-                <a href="/login" className="bg-red-700 text-white px-10 py-2 rounded-full hover:bg-red-900 mt-2">Área do Associado</a>
+                <button onClick={() => handleMemberAreaButton()} className="bg-red-700 text-white px-10 py-2 rounded-full hover:bg-red-900 mt-2">Área do Associado</button>
               </li>
             </ul>
           </div>
