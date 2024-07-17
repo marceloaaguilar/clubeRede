@@ -5,7 +5,7 @@ import Image from "next/image"
 import { list } from "postcss"
 import { useRouter, useSearchParams } from 'next/navigation'
 const AES = require("crypto-js/aes")
-const CryptoJS = require("crypto-js")
+const CryptoJS = require("crypto-js");
 
 const MEMBER_DATA_HASH_URL_PARAM = 'id'
 
