@@ -16,12 +16,14 @@ const MEMBER_DATA_HASH_URL_PARAM = 'id'
 export default function Home() {
   const[showMenu, setShowMenu] = useState(false);
   const [memberDataHash, setMemeberDataHash] = useState<string | null>(null);
+  const [isMemberAuthenticationLoading, setIsMemberAuthenticationLoading] = useState<boolean>(false);
 
   const searchParams = useSearchParams();
   const { push } = useRouter();
 
   const authenticateMember = async (cpf: string, token: string): Promise<boolean> => {
     try {
+      setIsMemberAuthenticationLoading(true)
       const payload = { cpfCnpjCliente: cpf }
       const response = await fetch('https://integracao.redeveiculos.com/api/v2/prod/obterStatusLogin/', {
         body: new URLSearchParams({ json: JSON.stringify(payload) }),
@@ -33,18 +35,19 @@ export default function Home() {
         method: 'POST'
       })
 
+      setIsMemberAuthenticationLoading(false)
+
       const responseData = await response.json()
 
       return responseData.message === 'OK'
     } catch (error) {
+      setIsMemberAuthenticationLoading(false)
       console.log(error)
       return false
     }
   }
 
   const handleMemberAreaButton = async (): Promise<void> => {
-    push('associado');
-    return
     try {
       if (!memberDataHash) {
         alert('Associado inválido.')
@@ -101,10 +104,10 @@ export default function Home() {
     { src: '/shopping.jpg', alt: 'Compras', text: 'Super Descontos em Lojas' },
   ];
 
-  // useEffect(() => {
-  //   const memberDataHashParamValue = searchParams.get(MEMBER_DATA_HASH_URL_PARAM)
-  //   setMemeberDataHash(memberDataHashParamValue ? memberDataHashParamValue.replaceAll(' ', '+') : null)
-  // }, [])
+  useEffect(() => {
+    const memberDataHashParamValue = searchParams.get(MEMBER_DATA_HASH_URL_PARAM)
+    setMemeberDataHash(memberDataHashParamValue ? memberDataHashParamValue.replaceAll(' ', '+') : null)
+  }, [])
 
   return (
     <main className="scroll-smooth font-sans">
@@ -140,7 +143,11 @@ export default function Home() {
                 <a className="text-white hover:text-red-700" href="#descontos">Descontos</a>
               </li>
               <li>
-                <button onClick={() => handleMemberAreaButton()} className="bg-red-700 text-white px-10 py-2 rounded-full hover:bg-red-900 mt-2">Área do Associado</button>
+                <button onClick={() => handleMemberAreaButton()} className="bg-red-700 text-white px-10 py-2 rounded-full hover:bg-red-900 mt-2">
+                  {
+                    isMemberAuthenticationLoading ? 'Carregando ...' : 'Área do Associado'
+                  }
+                </button>
               </li>
             </ul>
           </div>
