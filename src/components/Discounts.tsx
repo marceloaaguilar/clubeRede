@@ -15,6 +15,7 @@ export default function Discounts() {
   const [filterCategory, setFilterCategory] = useState()
   const [palavraChave, setPalavraChave] = useState<string>()
   const [empresasVisiveis, setEmpresasVisiveis] = useState<Empresa[]>([])
+  const [isMemberAuthenticated, setIsMemberAuthenticated] = useState<boolean>(false);
 
   const searchParams = useSearchParams()
   const { push } = useRouter()
@@ -44,6 +45,7 @@ export default function Discounts() {
   const checkIfIsMemberAuthenticated = async (memberDataHash: string | null): Promise<void> => {
     try {
       if (!memberDataHash) {
+        setIsMemberAuthenticated(false);
         push('/')
         return
       }
@@ -53,12 +55,16 @@ export default function Discounts() {
       const isMemberAuthenticated = await authenticateMember(memberData.cpfCnpjCliente as string, memberData.token as string)
 
       if (!isMemberAuthenticated) {
+        setIsMemberAuthenticated(false);
         push('/')
         return
       }
+
+      setIsMemberAuthenticated(true);
     } catch (error) {
-      alert('Associado não autenticado.')
+      setIsMemberAuthenticated(false);
       push('/')
+      alert('Associado não autenticado.')
     }
   }
 
@@ -171,7 +177,7 @@ export default function Discounts() {
     setEmpresas(listaEmpresas)
   }, [listaEmpresas])
 
-  return (
+  return isMemberAuthenticated && (
     <div id="descontos">
       <div className="flex bg-red-700 justify-center h-20 items-center">
         <h3 className="text-2xl font-bold">Descontos</h3>
