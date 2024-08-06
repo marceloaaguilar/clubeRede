@@ -224,7 +224,7 @@ export default function Discounts() {
         {empresas.map((empresas) =>
           <div key={empresas.id} className="grid justify-center bg-white items-center text-center rounded-lg">
             <div className="py-6 px-6 bg-slate-200 rounded-lg w-full">
-              <Image className="xl:w-48 h-48 object-contain md:w-96 rounded-3xl" src={empresas.logo} alt="" width={350} height={350} />
+              <Image unoptimized className="xl:w-48 h-48 object-contain md:w-96 rounded-3xl" src={empresas.logo} alt="" width={350} height={350} />
             </div>
             <div className="max-w-full">
               <h3 className="text-black text-xl font-bold mt-4">{empresas.nome}</h3>

@@ -16,7 +16,7 @@ export default function Navbar(){
     
       <nav className="fixed top-0 left-0 w-full bg-black z-50 px-4 py-2 md:px-8 flex justify-between items-center">
         <div>
-          <Image src="/logo_Clube_Rede.png" alt="Logo Clube Rede" width={100} height={50} />
+          <Image unoptimized src="/logo_Clube_Rede.png" alt="Logo Clube Rede" width={100} height={50} />
         </div>
         <div className="md:hidden">
           <button onClick={() => setShowMenu(!showMenu)} type="button" className="inline-flex items-center justify-center p-2 text-gray-500 rounded-lg focus:text-white focus:outline-none">
