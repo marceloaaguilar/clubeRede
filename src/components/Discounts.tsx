@@ -2,8 +2,8 @@
 import { Empresa } from "@/lib/interfaces"
 import { useEffect, useState } from "react"
 import Image from "next/image"
-import { list } from "postcss"
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
+
 const AES = require("crypto-js/aes")
 const CryptoJS = require("crypto-js");
 
@@ -14,11 +14,10 @@ export default function Discounts() {
   const [empresas, setEmpresas] = useState<Empresa[]>([])
   const [filterCategory, setFilterCategory] = useState()
   const [palavraChave, setPalavraChave] = useState<string>()
-  const [empresasVisiveis, setEmpresasVisiveis] = useState<Empresa[]>([])
   const [isMemberAuthenticated, setIsMemberAuthenticated] = useState<boolean>(false);
+  const [isMemberAuthenticationLoading, setIsMemberAuthenticationLoading] = useState<boolean>(false);
 
   const searchParams = useSearchParams()
-  const { push } = useRouter()
 
   const authenticateMember = async (cpf: string, token: string): Promise<boolean> => {
     try {
@@ -43,10 +42,11 @@ export default function Discounts() {
   }
 
   const checkIfIsMemberAuthenticated = async (memberDataHash: string | null): Promise<void> => {
+    setIsMemberAuthenticationLoading(true)
     try {
       if (!memberDataHash) {
+        setIsMemberAuthenticationLoading(false);
         setIsMemberAuthenticated(false);
-        push('/')
         return
       }
 
@@ -55,15 +55,16 @@ export default function Discounts() {
       const isMemberAuthenticated = await authenticateMember(memberData.cpfCnpjCliente as string, memberData.token as string)
 
       if (!isMemberAuthenticated) {
+        setIsMemberAuthenticationLoading(false);
         setIsMemberAuthenticated(false);
-        push('/')
         return
       }
 
+      setIsMemberAuthenticationLoading(false);
       setIsMemberAuthenticated(true);
     } catch (error) {
+      setIsMemberAuthenticationLoading(false);
       setIsMemberAuthenticated(false);
-      push('/')
       alert('Associado não autenticado.')
     }
   }
@@ -177,7 +178,7 @@ export default function Discounts() {
     setEmpresas(listaEmpresas)
   }, [listaEmpresas])
 
-  return isMemberAuthenticated && (
+  return (
     <div id="descontos">
       <div className="flex bg-red-700 justify-center h-20 items-center">
         <h3 className="text-2xl font-bold">Descontos</h3>
@@ -220,21 +221,28 @@ export default function Discounts() {
         </div>
         <button onClick={handleSearch} className="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded w-full mt-4">Buscar</button>
       </div>
-      <div className="sm-grid flex flex-row flex-wrap gap-4 mt-5 px-4 justify-center">
-        {empresas.map((empresas) =>
-          <div key={empresas.id} className="grid justify-center bg-white items-center text-center rounded-lg">
-            <div className="py-6 px-6 bg-slate-200 rounded-lg w-full">
-              <Image unoptimized className="xl:w-48 h-48 object-contain md:w-96 rounded-3xl" src={empresas.logo} alt="" width={350} height={350} />
+      { isMemberAuthenticated ? (
+        <div className="sm-grid flex flex-row flex-wrap gap-4 mt-5 px-4 justify-center">
+        { 
+          empresas.map((empresas) =>
+            <div key={empresas.id} className="grid justify-center bg-white items-center text-center rounded-lg">
+              <div className="py-6 px-6 bg-slate-200 rounded-lg w-full">
+                <Image unoptimized className="xl:w-48 h-48 object-contain md:w-96 rounded-3xl" src={empresas.logo} alt="" width={350} height={350} />
+              </div>
+              <div className="max-w-full">
+                <h3 className="text-black text-xl font-bold mt-4">{empresas.nome}</h3>
+              </div>
+              <a href={empresas.link} target="_blank" className="bg-red-700 hover:bg-red-800 text-white font-bold mx-6 my-4 py-2 px-4 rounded">Ver desconto</a>
             </div>
-            <div className="max-w-full">
-              <h3 className="text-black text-xl font-bold mt-4">{empresas.nome}</h3>
-            </div>
-            <a href={empresas.link} target="_blank" className="bg-red-700 hover:bg-red-800 text-white font-bold mx-6 my-4 py-2 px-4 rounded">Ver desconto</a>
-          </div>
-
-        )}
-
-      </div>
+          )
+        }
+        </div>
+      ) : (
+        <span className='fullwidth text-center flex justify-center my-12'>
+          { isMemberAuthenticationLoading ? "Carregando descontos..." : "Acesso negado." }
+        </span>
+      )
+    }
     </div>
   )
 }

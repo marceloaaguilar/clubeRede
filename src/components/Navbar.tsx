@@ -18,7 +18,7 @@ export default function Navbar(){
         <div>
           <Image unoptimized src="/logo_Clube_Rede.png" alt="Logo Clube Rede" width={100} height={50} />
         </div>
-        <div className="md:hidden">
+        {/* <div className="md:hidden">
           <button onClick={() => setShowMenu(!showMenu)} type="button" className="inline-flex items-center justify-center p-2 text-gray-500 rounded-lg focus:text-white focus:outline-none">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
@@ -60,7 +60,7 @@ export default function Navbar(){
               ></div>
             </>
           )}
-        </AnimatePresence>
+        </AnimatePresence> */}
       </nav>
   );
 };
