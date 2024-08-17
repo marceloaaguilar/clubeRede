@@ -3,6 +3,7 @@ import { Empresa } from "@/lib/interfaces"
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import { useSearchParams } from 'next/navigation'
+import ModalCupom from "./ModalCupom"
 
 const AES = require("crypto-js/aes")
 const CryptoJS = require("crypto-js");
@@ -16,6 +17,12 @@ export default function Discounts() {
   const [palavraChave, setPalavraChave] = useState<string>()
   const [isMemberAuthenticated, setIsMemberAuthenticated] = useState<boolean>(false);
   const [isMemberAuthenticationLoading, setIsMemberAuthenticationLoading] = useState<boolean>(false);
+  const [statusModalCupom, setStatusModalCupom] = useState<boolean>(false);
+  const [linkCupom, setLinkCupom] = useState<string>('');
+  const [cupomModal, setCupomModal] = useState<string>('');
+  const [benefitsModal, setBenefitsModal] = useState<string>('');
+  const [conditionsModal, setConditionsModal] = useState<string>('');
+  const [validadeModal, setValidadeMotal] = useState<string>('');
 
   const searchParams = useSearchParams()
 
@@ -91,9 +98,8 @@ export default function Discounts() {
     await setListaEmpresas(
       [
         { id: 1, nome: "Riachuelo", categoria: "Roupas", logo: "/logoRiachuelo.png", palavrasChave: "roupas,riachuelo,moda", link: "https://riachuelo.parceriasonline.com.br/clube-da-rede-veiculos" },
-        // { id: 2, nome: "Marisa", categoria: "Roupas", logo: "/clubemarisa.jpg", palavrasChave: "roupas,marisa,moda" },
         { id: 3, nome: "Ponto", categoria: "Eletrodomesticos", logo: "/ponto_pontofrio.jpg", palavrasChave: "eletrodomésticos, ponto, ponto frio", link: "https://pontofrio.parcerialink.com.br/cluberede" },
-        { id: 4, nome: "Loja Seculus", categoria: "Relogios", logo: "/logoSeculos.png", palavrasChave: "loja de relógios, relojoaria, seculus" },
+        { id: 4, nome: "Loja Seculus", categoria: "Relogios", logo: "/logoSeculos.png", palavrasChave: "loja de relógios, relojoaria, seculus", cupom: 'REDE50', linkCupom: "https://seculusoutletday.com.br" },
         { id: 5, nome: "AliExpress", categoria: "Ecommerce", logo: "/Aliexpress_logo.png", palavrasChave: "china, ecommerce, aliexpress", link: "https://aliexpress.parceriasonline.com.br/clube-da-rede-veiculos" },
         { id: 6, nome: "Hering", categoria: "Roupas", logo: "/heringLogo.png", palavrasChave: "roupas,hering,moda", link: "https://hering.parceriasonline.com.br/clube-da-rede-veiculos"},
         { id: 7, nome: "Hóteis", categoria: "Hoteis", logo: "/djsnlcisjvisjncisdp.png", palavrasChave: "hóteis, rede de hoteis, hoteis.com", link: "https://hoteis.parceriasonline.com.br/clube-da-rede-veiculos" },
@@ -102,12 +108,10 @@ export default function Discounts() {
         { id: 10, nome: "Zattini", categoria: "Roupas", logo: "/clube-348.jpg", palavrasChave: "roupas,zattini,moda", link: "https://zattini.parcerialink.com.br/cluberede" },
         { id: 11, nome: "Vivara", categoria: "Joias", logo: "/vivara-logo.png", palavrasChave: "joias,vivara,pulseiras", link: "https://vivara.parcerialink.com.br/cluberede" },
         { id: 12, nome: "Centauro", categoria: "Tenis", logo: "/clube-422.jpg", palavrasChave: "esportes,centauro,atleta,tenis", link: "https://centauro.parceriasonline.com.br/clube-da-rede-veiculos" },
-        // { id: 13, nome: "Estácio", categoria: "Faculdade", logo: "/logoEstacio.png", palavrasChave: "faculdade,estácio,cursos" },
         { id: 14, nome: "Netshoes", categoria: "Roupas", logo: "/clube-341.jpg", palavrasChave: "esportes,roupas,netshoes,tenis", link: "https://netshoes.parcerialink.com.br/cluberede" },
         { id: 15, nome: "Casas Bahia", categoria: "Eletrodomesticos", logo: "/clube-casasbahia.png", palavrasChave: "eletrodomésticos, casas bahia", link: "https://casasbahia.parcerialink.com.br/cluberede" },
-        // { id: 16, nome: "Magalu", categoria: "Eletrodomesticos", logo: "/clubemagalu.jpg", palavrasChave: "eletrodomésticos, magalu, magazine luiza" },
         { id: 17, nome: "Petz", categoria: "Petshop", logo: "/LogoPetzCBC250x250.png", palavrasChave: "petshop, cachorro, gato, petz", link: "https://petz.parceriasonline.com.br/clube-da-rede-veiculos" },
-        // { id: 18, nome: "Dominos", categoria: "Pizzaria", logo: "/Dominos.jpg", palavrasChave: "pizzaria, pizza, comida, dominos" },
+        { id: 18, nome: "Dominos", categoria: "Pizzaria", logo: "/Dominos.jpg", palavrasChave: "pizzaria, pizza, comida, dominos", cupom:"PIZZA30", linkCupom: 'https://www.dominos.com.br/pages/order/?utm_source=auget&utm_campaign=aug', benefits: "Aproveite 30% de desconto em pizzas!", conditions: 'Desconto válido para pedidos efetuados apenas no site ou App da Domino´s Pizza; Válido para Pizzas médias e grandes; Válido para massas fina ou tradicional e todos os sabores; Válido para todos os dias da semana; O desconto só é aplicado na pizza e não no pedido inteiro; Desconto não se aplica na taxa de entrega; Não cumulativo com outras promoções; Válido também para carryout: retirada na loja; O cupom de desconto deverá ser inserido no carrinho no momento do checkout; O desconto não será válido para pedidos no balcão; Confira as lojas participantes.' },
         { id: 19, nome: "Extra", categoria: "Hipermercado", logo: "/logo-extra.png", palavrasChave: "extra, hipermercado", link: "https://extra.parcerialink.com.br/cluberede" },
         { id: 20, nome: "Underarmour", categoria: "Roupas", logo: "/logo-underarmor.png", palavrasChave: "roupas, esportes, underarmour", link: "https://underarmour.parcerialink.com.br/cluberede" },
         { id: 21, nome: "Mizuno", categoria: "Roupas", logo: "/logo-mizuno.png", palavrasChave: "roupas, esportes, mizuno", link: "https://mizuno.parcerialink.com.br/cluberede" },
@@ -153,13 +157,33 @@ export default function Discounts() {
         { id: 66, nome: "Travelex", categoria: "Serviços Financeiros", logo: "/logoTravelex.png", palavrasChave: "travelex, serviços financeiros", link: "https://travelex.parceriasonline.com.br/clube-da-rede-veiculos" },
         { id: 67, nome: "Umbro", categoria: "Roupas", logo: "/logoUmbro.png", palavrasChave: "umbro, roupas", link: "https://umbro.parceriasonline.com.br/clube-da-rede-veiculos" },
         { id: 68, nome: "Walita", categoria: "Eletrodomesticos", logo: "/logoWalita.png", palavrasChave: "walita, eletrodomésticos", link: "https://walita.parceriasonline.com.br/clube-da-rede-veiculos" },
-        { id: 69, nome: "WebFones", categoria: "Tecnologia", logo: "/logoWebFones.png", palavrasChave: "webfones, tecnologia", link: "https://webfones.parceriasonline.com.br/clube-da-rede-veiculos" },
-        { id: 70, nome: "Buser", categoria: "Transporte", logo: "/logoBuser.png", palavrasChave: "buser, transporte", link: "https://buser.parceriasonline.com.br/clube-da-rede-veiculos" }
+        { id: 69, nome: "WebFones", categoria: "Tecnologia", logo: "/logoWebFones.png", palavrasChave: "webfones, tecnologia", link: "https://webfones.parceriasonline.com.br/clube-da-rede-veiculos"},
+        { id: 70, nome: "Buser", categoria: "Transporte", logo: "/logoBuser.png", palavrasChave: "buser, transporte", link: "https://buser.parceriasonline.com.br/clube-da-rede-veiculos"},
+        { id: 71, nome: "Luckau", categoria: "Alimentos", logo: "/logoLuckau.png", palavrasChave: "chocolate, luckau, comida", cupom:"CLUBE12", linkCupom: 'https://www.luckau.com.br/', benefits: "Aproveite 12% OFF no site!", conditions: 'Aproveite 12% OFF em todo o site da Luckau. Cupom cumulativo com outras promoções. Cupom não cumulativo com outros cupons. O desconto não contempla o frete.' },
+        { id: 72, nome: "JadeJade", categoria: "Roupas", logo: "/logoJadeJade.png", palavrasChave: "roupas, jadejade, moda", cupom:"TOP15", linkCupom: 'https://www.jadejade.com.br/', benefits: "Aproveite 15% OFF cumulativo + frete grátis no site da Jade²!", conditions: 'Aproveite 15% OFF + frete grátis em todo o site da JadeJade. Cupom cumulativo com outras promoções. Cupom não cumulativo com outros cupons. O desconto contempla o frete.', validade: '31/12/2024' },
+        { id: 73, nome: "Mash", categoria: "Roupas", logo: "/logoMash.png", palavrasChave: "roupas, mash, moda", cupom:"QUERO", linkCupom: 'https://www.mash.com.br/', benefits: "Aproveite 15% OFF no site!", conditions: 'Aproveite 15% OFF em todo o site da Mash. Cupom não cumulativo com outras promoções. Cupom não cumulativo com outros cupons. O desconto não contempla o frete. Benefício válido para todo o site exceto produtos da marca Calvin Klein.' },
+        { id: 74, nome: "Approve", categoria: "Roupas", logo: "/logoApprove.png", palavrasChave: "roupas, approve, moda", cupom:"QUINZE", linkCupom: 'https://www.justapprove.com.br/', benefits: "Aproveite 15% OFF no site da Approve!", conditions: 'Cupom cumulativo com outras promoções do site. Cupom não cumulativo com outros cupons. O desconto não contempla o frete.', validade: '31/12/2024' },
+        { id: 75, nome: "Stanley", categoria: "Ferramentas", logo: "/logoStanley.png", palavrasChave: "canecas, stanley, copos, ferramentas", cupom:"DESC10", linkCupom: 'https://www.stanley1913.com.br/', benefits: "Aproveite 10% OFF na Stanley!", conditions: 'Cupom não cumulativo com outras promoções. Válido para todas as compras no site. O desconto não contempla o frete. Cupom não cumulativo com outros cupons. O cupom não é válido para Quenchers.' , validade: '31/12/2024' },
+        { id: 76, nome: "Open English", categoria: "Escolas", logo: "/logoOpenEnglish.png", palavrasChave: "inglês, Open English, aprender", linkCupom: 'https://www.stanley1913.com.br/', benefits: "Aproveite 65% OFF nos cursos de inglês da Open English!", conditions: 'Clique no link indicado e preencha seus dados para ter acesso ao benefício. Não é necessário inserir cupom de desconto. Confira as demais condições e regras no link. Promoção sujeita a alterações. As vendas dos cursos são feitas através de teleconsultores que entrarão em contato através do telefone fornecido no cadastro. Os descontos oferecidos podem sofrer alterações a depender de sazonalidades.' },
+        { id: 77, nome: "FlixBus", categoria: "Transporte", logo: "/logoFlixBus.png", palavrasChave: "passagens, FlixBus, onibus", linkCupom: 'https://www.hiphiphour.com/0478bcd77185e5a95dda', benefits: "Aproveite 15% OFF em passagens na FlixBus!", conditions: 'Acesse o link, insira o seu nome e e-mail para receber o seu cupom de desconto no e-mail (confira a caixa de spam). Após o recebimento do cupom de desconto, o cliente deve acessar o site www.flixbus.com.br para escolher o seu destino e utilizar o seu cupom. O desconto é válido para viagens até 31.12.2024. O desconto só é válido para viagens em território brasileiro. Cupom cumulativo com outras promoções do site. Cupom não cumulativo com outros cupons. Não é possível creditar um voucher posteriormente a uma reserva já efetuada. Não é possível resgatar o valor do voucher em dinheiro. A revenda e publicação dos vouchers é proibida. A quantidade de vouchers é limitada a 4 (quatro) por pessoa por ano. O cupom é válido somente para viagens com parceiros operacionais da FlixBus (Veículos verdes, com a logomarca da FlixBus). O cupom não é válido para compras de passagens no marketplace da FlixBus (viagens de parceiros que utilizam o site da FlixBus como ferramenta de venda - veículos sem a logomarca da FlixBus).', validade: '31/12/2024' },
+
       ]
 
 
     )
   }
+
+  const showDiscount = (cupom:string, link: string, benefits?: string, conditions?:string, validade?:string) => {
+    setCupomModal(cupom);
+    setLinkCupom(link);
+    setBenefitsModal(benefits? benefits : '')
+    setConditionsModal(conditions ? conditions: '')
+    setValidadeMotal(validade ? validade : '')
+    setStatusModalCupom(true);
+
+  }
+
+  const closeModal = () => setStatusModalCupom(false);
 
   useEffect(() => {
     const memberDataHashParamValue = searchParams.get(MEMBER_DATA_HASH_URL_PARAM)
@@ -188,30 +212,32 @@ export default function Discounts() {
           <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Filtrar por Categoria</label>
           <select value={filterCategory} onChange={(e: any) => setFilterCategory(e.target.value)} id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <option value="placeholder" selected>Escolha uma Categoria</option>
-            <option value="Roupas">Loja de Roupas</option>
-            <option value="Ecommerce">E-Commerce</option>
-            <option value="Hoteis">Rede de Hóteis</option>
-            <option value="Tênis">Tênis</option>
-            <option value="Joias">Loja de Jóias</option>
+            <option value="Acessórios">Acessórios</option>
+            <option value="Alimentos">Alimentos</option>
             <option value="AluguelCarros">Aluguel de Carros</option>
+            <option value="Automotivo">Automotivo</option>
+            <option value="Beleza">Beleza</option>
+            <option value="Cosméticos">Cosméticos</option>
+            <option value="Ecommerce">E-Commerce</option>
+            <option value="Eletrodomesticos">Eletrodomésticos</option>
+            <option value="Embalagens">Embalagens</option>
+            <option value="Entretenimento">Entretenimento</option>
+            <option value="Escolas">Escolas</option>
+            <option value="Esportes">Esportes</option>
             <option value="Faculdade">Faculdades</option>
+            <option value="Ferramentas">Ferramentas</option>
+            <option value="Flores">Flores</option>
+            <option value="Hoteis">Rede de Hóteis</option>
+            <option value="Joias">Loja de Jóias</option>
+            <option value="Móveis">Móveis</option>
             <option value="Petshop">Pet Shop</option>
             <option value="Pizzaria">Pizzaria</option>
-            <option value="Embalagens">Embalagens</option>
-            <option value="Beleza">Beleza</option>
-            <option value="Automotivo">Automotivo</option>
-            <option value="Cosméticos">Cosméticos</option>
-            <option value="Alimentos">Alimentos</option>
-            <option value="Entretenimento">Entretenimento</option>
-            <option value="Flores">Flores</option>
-            <option value="Acessórios">Acessórios</option>
+            <option value="Roupas">Loja de Roupas</option>
             <option value="Segurança">Segurança</option>
-            <option value="Tecnologia">Tecnologia</option>
             <option value="Serviços">Serviços</option>
-            <option value="Eletrodomesticos">Eletrodomésticos</option>
-            <option value="Esportes">Esportes</option>
-            <option value="Móveis">Móveis</option>
             <option value="Serviços Financeiros">Serviços Financeiros</option>
+            <option value="Tecnologia">Tecnologia</option>
+            <option value="Tênis">Tênis</option>
             <option value="Transporte">Transporte</option>
           </select>
         </div>
@@ -228,8 +254,14 @@ export default function Discounts() {
               <div className="max-w-full">
                 <h3 className="text-black text-xl font-bold mt-4">{empresas.nome}</h3>
               </div>
-              <a href={empresas.link} target="_blank" className="bg-red-700 hover:bg-red-800 text-white font-bold mx-6 my-4 py-2 px-4 rounded">Ver desconto</a>
-            </div>
+
+            {!empresas.linkCupom? (
+              <a href={empresas.link} target="_blank" className="bg-red-700 hover:bg-red-800 text-white font-bold mx-6 my-4 py-2 px-4 rounded">Ver desconto </a>
+              ) 
+              :(<a onClick={() => showDiscount(empresas.cupom !== undefined? empresas.cupom : '', empresas.linkCupom !== undefined ? empresas.linkCupom : '', empresas.benefits, empresas.conditions, empresas.validade)} className="bg-red-700 hover:bg-red-800 text-white font-bold mx-6 my-4 py-2 px-4 rounded cursor-pointer"> Ver Cupom </a>
+            )}
+
+          </div>
           )
         }
         </div>
@@ -239,6 +271,7 @@ export default function Discounts() {
         </span>
       )
     }
+    <ModalCupom isOpen={statusModalCupom} link={linkCupom} cupom={cupomModal} benefits={benefitsModal} conditions={conditionsModal} validade={validadeModal} onClose={closeModal}/>
     </div>
   )
 }
