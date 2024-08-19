@@ -7,7 +7,7 @@ export default function Associado(){
     <div className="font-sans">
       <Navbar/>
       <Discounts/>
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   )
 }

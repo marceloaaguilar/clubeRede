@@ -4,6 +4,11 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import { useSearchParams } from 'next/navigation'
 import ModalCupom from "./ModalCupom"
+import { SpinningCircles } from 'react-loading-icons'
+import { GoSearch } from "react-icons/go";
+
+
+import Unauthenticated from "./../../public/unauthenticated.svg"
 
 const AES = require("crypto-js/aes")
 const CryptoJS = require("crypto-js");
@@ -200,78 +205,89 @@ export default function Discounts() {
 
   return (
     <div id="descontos">
-      <div className="flex bg-red-700 justify-center h-20 items-center">
-        <h3 className="text-2xl font-bold">Descontos</h3>
-      </div>
-      <div className="max-w-sm mx-auto mt-5">
-        <div className="mb-6">
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Palavra Chave</label>
-          <input type="text" id="first_name" value={palavraChave} onChange={(e: any) => setPalavraChave(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Palavra Chave" />
-        </div>
-        <div>
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Filtrar por Categoria</label>
-          <select value={filterCategory} onChange={(e: any) => setFilterCategory(e.target.value)} id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option value="placeholder" selected>Escolha uma Categoria</option>
-            <option value="Acessórios">Acessórios</option>
-            <option value="Alimentos">Alimentos</option>
-            <option value="AluguelCarros">Aluguel de Carros</option>
-            <option value="Automotivo">Automotivo</option>
-            <option value="Beleza">Beleza</option>
-            <option value="Cosméticos">Cosméticos</option>
-            <option value="Ecommerce">E-Commerce</option>
-            <option value="Eletrodomesticos">Eletrodomésticos</option>
-            <option value="Embalagens">Embalagens</option>
-            <option value="Entretenimento">Entretenimento</option>
-            <option value="Escolas">Escolas</option>
-            <option value="Esportes">Esportes</option>
-            <option value="Faculdade">Faculdades</option>
-            <option value="Ferramentas">Ferramentas</option>
-            <option value="Flores">Flores</option>
-            <option value="Hoteis">Rede de Hóteis</option>
-            <option value="Joias">Loja de Jóias</option>
-            <option value="Móveis">Móveis</option>
-            <option value="Petshop">Pet Shop</option>
-            <option value="Pizzaria">Pizzaria</option>
-            <option value="Roupas">Loja de Roupas</option>
-            <option value="Segurança">Segurança</option>
-            <option value="Serviços">Serviços</option>
-            <option value="Serviços Financeiros">Serviços Financeiros</option>
-            <option value="Tecnologia">Tecnologia</option>
-            <option value="Tênis">Tênis</option>
-            <option value="Transporte">Transporte</option>
-          </select>
-        </div>
-        <button onClick={handleSearch} className="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded w-full mt-4">Buscar</button>
-      </div>
       { isMemberAuthenticated ? (
-        <div className="sm-grid flex flex-row flex-wrap gap-4 mt-5 px-4 justify-center">
-        { 
-          empresas.map((empresas) =>
-            <div key={empresas.id} className="grid justify-center bg-white items-center text-center rounded-lg">
-              <div className="py-6 px-6 bg-slate-200 rounded-lg w-full">
-                <Image unoptimized className="xl:w-48 h-48 object-contain md:w-96 rounded-3xl" src={empresas.logo} alt="" width={350} height={350} />
+          <>
+            <div className="flex w-full justify-center px-24 gap-8">
+              <div className="w-72">
+                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Palavra Chave</label>
+                <input type="text" id="first_name" value={palavraChave} onChange={(e: any) => setPalavraChave(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Palavra Chave" />
               </div>
-              <div className="max-w-full">
-                <h3 className="text-black text-xl font-bold mt-4">{empresas.nome}</h3>
+              <div className='w-72'>
+                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Filtrar por Categoria</label>
+                <select value={filterCategory} onChange={(e: any) => setFilterCategory(e.target.value)} id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block h-[42px] w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <option value="placeholder" selected>Escolha uma Categoria</option>
+                  <option value="Acessórios">Acessórios</option>
+                  <option value="Alimentos">Alimentos</option>
+                  <option value="AluguelCarros">Aluguel de Carros</option>
+                  <option value="Automotivo">Automotivo</option>
+                  <option value="Beleza">Beleza</option>
+                  <option value="Cosméticos">Cosméticos</option>
+                  <option value="Ecommerce">E-Commerce</option>
+                  <option value="Eletrodomesticos">Eletrodomésticos</option>
+                  <option value="Embalagens">Embalagens</option>
+                  <option value="Entretenimento">Entretenimento</option>
+                  <option value="Escolas">Escolas</option>
+                  <option value="Esportes">Esportes</option>
+                  <option value="Faculdade">Faculdades</option>
+                  <option value="Ferramentas">Ferramentas</option>
+                  <option value="Flores">Flores</option>
+                  <option value="Hoteis">Rede de Hóteis</option>
+                  <option value="Joias">Loja de Jóias</option>
+                  <option value="Móveis">Móveis</option>
+                  <option value="Petshop">Pet Shop</option>
+                  <option value="Pizzaria">Pizzaria</option>
+                  <option value="Roupas">Loja de Roupas</option>
+                  <option value="Segurança">Segurança</option>
+                  <option value="Serviços">Serviços</option>
+                  <option value="Serviços Financeiros">Serviços Financeiros</option>
+                  <option value="Tecnologia">Tecnologia</option>
+                  <option value="Tênis">Tênis</option>
+                  <option value="Transporte">Transporte</option>
+                </select>
               </div>
+              <button onClick={handleSearch}>
+                <GoSearch className='w-8 h-8 mt-[25px]' />
+              </button>
+            </div>
+            <div className="sm-grid flex flex-row flex-wrap gap-4 mt-5 px-4 justify-center">
+              { 
+                empresas.map((empresas) =>
+                  <div key={empresas.id} className="grid justify-center bg-white items-center text-center rounded-lg">
+                    <div className="py-6 px-6 bg-slate-200 rounded-lg w-full">
+                      <Image unoptimized className="xl:w-48 h-48 object-contain md:w-96 rounded-3xl" src={empresas.logo} alt="" width={350} height={350} />
+                    </div>
+                    <div className="max-w-full">
+                      <h3 className="text-black text-xl font-bold mt-4">{empresas.nome}</h3>
+                    </div>
 
-            {!empresas.linkCupom? (
-              <a href={empresas.link} target="_blank" className="bg-red-700 hover:bg-red-800 text-white font-bold mx-6 my-4 py-2 px-4 rounded">Ver desconto </a>
-              ) 
-              :(<a onClick={() => showDiscount(empresas.cupom !== undefined? empresas.cupom : '', empresas.linkCupom !== undefined ? empresas.linkCupom : '', empresas.benefits, empresas.conditions, empresas.validade)} className="bg-red-700 hover:bg-red-800 text-white font-bold mx-6 my-4 py-2 px-4 rounded cursor-pointer"> Ver Cupom </a>
-            )}
+                  {!empresas.linkCupom? (
+                    <a href={empresas.link} target="_blank" className="bg-red-700 hover:bg-red-800 text-white font-bold mx-6 my-4 py-2 px-4 rounded">Ver desconto </a>
+                    ) 
+                      :(<a onClick={() => showDiscount(empresas.cupom !== undefined? empresas.cupom : '', empresas.linkCupom !== undefined ? empresas.linkCupom : '', empresas.benefits, empresas.conditions, empresas.validade)} className="bg-red-700 hover:bg-red-800 text-white font-bold mx-6 my-4 py-2 px-4 rounded cursor-pointer"> Ver Cupom </a>
+                    )}
 
-          </div>
-          )
-        }
-        </div>
-      ) : (
-        <span className='fullwidth text-center flex justify-center my-12'>
-          { isMemberAuthenticationLoading ? "Carregando descontos..." : "Acesso negado." }
-        </span>
-      )
-    }
-    <ModalCupom isOpen={statusModalCupom} link={linkCupom} cupom={cupomModal} benefits={benefitsModal} conditions={conditionsModal} validade={validadeModal} onClose={closeModal}/>
+                  </div>
+                )
+              }
+            </div>
+            <ModalCupom isOpen={statusModalCupom} link={linkCupom} cupom={cupomModal} benefits={benefitsModal} conditions={conditionsModal} validade={validadeModal} onClose={closeModal}/>
+          </>
+        ) : (
+          <span className='fullwidth text-center flex justify-center my-12'>
+            { 
+              isMemberAuthenticationLoading
+              ? <div className='flex flex-col justify-center gap-10 text-center'>
+                  <SpinningCircles className='mx-auto'/>
+                  <span className='text-xl'>Carregando descontos...</span>
+              </div>
+              : <div className='flex flex-col justify-center gap-10'>
+                <Image unoptimized src={Unauthenticated} alt="" width={350} height={350} />
+                <span className='text-xl'>Associado não autenticado.</span>
+              </div>
+            }
+          </span>
+        )
+      }
     </div>
   )
 }
