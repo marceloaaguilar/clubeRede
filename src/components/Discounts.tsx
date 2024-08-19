@@ -207,13 +207,13 @@ export default function Discounts() {
     <div id="descontos">
       { isMemberAuthenticated ? (
           <>
-            <div className="flex w-full justify-center px-24 gap-8">
-              <div className="w-72">
-                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Palavra Chave</label>
+            <div className="flex flex-col md:flex-row w-full justify-center mt-2 px-4 md:px-24 gap-4 md:gap-8">
+              <div className="md:w-72">
+                <label className="hidden md:block text-sm font-medium text-gray-900 dark:text-white">Palavra Chave</label>
                 <input type="text" id="first_name" value={palavraChave} onChange={(e: any) => setPalavraChave(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Palavra Chave" />
               </div>
-              <div className='w-72'>
-                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Filtrar por Categoria</label>
+              <div className='md:w-72'>
+                <label className="hidden md:block text-sm font-medium text-gray-900 dark:text-white">Filtrar por Categoria</label>
                 <select value={filterCategory} onChange={(e: any) => setFilterCategory(e.target.value)} id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block h-[42px] w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                   <option value="placeholder" selected>Escolha uma Categoria</option>
                   <option value="Acessórios">Acessórios</option>
@@ -245,8 +245,9 @@ export default function Discounts() {
                   <option value="Transporte">Transporte</option>
                 </select>
               </div>
-              <button onClick={handleSearch}>
-                <GoSearch className='w-8 h-8 mt-[25px]' />
+              <button onClick={handleSearch} className='flex justify-center gap-4 w-full md:w-auto bg-red-700 hover:bg-red-800 md:bg-transparent md:hover:bg-transparent text-white font-bold py-2 px-4 md:p-0 rounded cursor-pointer'>
+                <span className="md:hidden">FILTRAR</span>
+                <GoSearch className='md:w-8 md:h-8 md:mt-[25px] w-6 h-6 md:hover:text-gray-300' />
               </button>
             </div>
             <div className="sm-grid flex flex-row flex-wrap gap-4 mt-5 px-4 justify-center">
@@ -273,19 +274,19 @@ export default function Discounts() {
             <ModalCupom isOpen={statusModalCupom} link={linkCupom} cupom={cupomModal} benefits={benefitsModal} conditions={conditionsModal} validade={validadeModal} onClose={closeModal}/>
           </>
         ) : (
-          <span className='fullwidth text-center flex justify-center my-12'>
+          <div className='fullwidth text-center flex justify-center my-12 m-12 md:m-0'>
             { 
               isMemberAuthenticationLoading
-              ? <div className='flex flex-col justify-center gap-10 text-center'>
+              ? <div className='flex flex-col justify-center gap-10 text-center my-[20vh] md:my-0'>
                   <SpinningCircles className='mx-auto'/>
-                  <span className='text-xl'>Carregando descontos...</span>
+                  <span className='text-xl font-bold'>Carregando descontos...</span>
               </div>
               : <div className='flex flex-col justify-center gap-10'>
-                <Image unoptimized src={Unauthenticated} alt="" width={350} height={350} />
-                <span className='text-xl'>Associado não autenticado.</span>
+                <Image unoptimized src={Unauthenticated} alt="" width={400} height={400} />
+                <span className='text-xl font-bold'>Associado não autenticado.</span>
               </div>
             }
-          </span>
+          </div>
         )
       }
     </div>
