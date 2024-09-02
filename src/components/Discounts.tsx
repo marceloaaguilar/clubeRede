@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation'
 import ModalCupom from "./ModalCupom"
 import { SpinningCircles } from 'react-loading-icons'
 import { GoSearch } from "react-icons/go";
-
+import Banners from "./Banners"
 
 import Unauthenticated from "./../../public/unauthenticated.svg"
 
@@ -171,7 +171,9 @@ export default function Discounts() {
         { id: 75, nome: "Stanley", categoria: "Ferramentas", logo: "/logoStanley.png", palavrasChave: "canecas, stanley, copos, ferramentas", cupom:"DESC10", linkCupom: 'https://www.stanley1913.com.br/', benefits: "Aproveite 10% OFF na Stanley!", conditions: 'Cupom não cumulativo com outras promoções. Válido para todas as compras no site. O desconto não contempla o frete. Cupom não cumulativo com outros cupons. O cupom não é válido para Quenchers.' , validade: '31/12/2024' },
         { id: 76, nome: "Open English", categoria: "Escolas", logo: "/logoOpenEnglish.png", palavrasChave: "inglês, Open English, aprender", linkCupom: 'https://www.stanley1913.com.br/', benefits: "Aproveite 65% OFF nos cursos de inglês da Open English!", conditions: 'Clique no link indicado e preencha seus dados para ter acesso ao benefício. Não é necessário inserir cupom de desconto. Confira as demais condições e regras no link. Promoção sujeita a alterações. As vendas dos cursos são feitas através de teleconsultores que entrarão em contato através do telefone fornecido no cadastro. Os descontos oferecidos podem sofrer alterações a depender de sazonalidades.' },
         { id: 77, nome: "FlixBus", categoria: "Transporte", logo: "/logoFlixBus.png", palavrasChave: "passagens, FlixBus, onibus", linkCupom: 'https://www.hiphiphour.com/0478bcd77185e5a95dda', benefits: "Aproveite 15% OFF em passagens na FlixBus!", conditions: 'Acesse o link, insira o seu nome e e-mail para receber o seu cupom de desconto no e-mail (confira a caixa de spam). Após o recebimento do cupom de desconto, o cliente deve acessar o site www.flixbus.com.br para escolher o seu destino e utilizar o seu cupom. O desconto é válido para viagens até 31.12.2024. O desconto só é válido para viagens em território brasileiro. Cupom cumulativo com outras promoções do site. Cupom não cumulativo com outros cupons. Não é possível creditar um voucher posteriormente a uma reserva já efetuada. Não é possível resgatar o valor do voucher em dinheiro. A revenda e publicação dos vouchers é proibida. A quantidade de vouchers é limitada a 4 (quatro) por pessoa por ano. O cupom é válido somente para viagens com parceiros operacionais da FlixBus (Veículos verdes, com a logomarca da FlixBus). O cupom não é válido para compras de passagens no marketplace da FlixBus (viagens de parceiros que utilizam o site da FlixBus como ferramenta de venda - veículos sem a logomarca da FlixBus).', validade: '31/12/2024' },
-
+        { id: 78, nome: "Sam's Club", categoria: "Hipermercado", logo: "/logoSamsclub.png", palavrasChave: "hipermercado, Sam's Clube, clube", cupom:"CUP75GEN", linkCupom: 'https://sejasocio.samsclub.com.br/index.php/parcerias-75300/?codigo_parceria=Auget_485584&codigo_cupom=CUP75GEN&codigo_promotor&utm_source=_9999_parceria_auget&utm_medium=parceria&utm_campaign=cup75-junho2024', benefits: "Ganhe R$75,00 de desconto na sua primeira compra no Sam's Club!", conditions: 'Benefício válido para compras a partir de R$300,00. Válido somente para novos sócios. O valor de cashback estará disponível em até 48h após o pagamento da anuidade; O desconto será vinculado ao CPF do sócio titular e será fornecido automaticamente no momento do pagamento da compra no clube;Válido somente para utilização nas lojas físicas; Para aplicação do desconto, o sócio deve ter uma compra com valor maior e/ ou igual a R$ 300,00, o prazo de uso do desconto é de até 30 dias.' },
+        { id: 79, nome: "Integral Médica", categoria: "Suplementos", logo: "/logoIntegralMedica.png", palavrasChave: "suplementos, Integral Médica", cupom:"CLUBE", linkCupom: 'https://www.integralmedica.com.br'},
+        { id: 80, nome: "Pizzaria Spoleto", categoria: "Pizzaria", logo: "/logoPizzariaSpoleto.png", palavrasChave: "pizzaria, Spoleto", cupom:"CLUBEPIZZA", linkCupom: 'https://www.pizzariaspoleto.com.br/tabs/cardapio', benefits: '50% desconto compras acima de 30,00 pedidos através do Site', conditions: 'Limitado a 1 uso por CPF.Não cumulativo com outras promoções.Válido somente para unidade Copacabana/RJ.'}
       ]
 
 
@@ -206,8 +208,15 @@ export default function Discounts() {
   return (
     <div id="descontos">
       { isMemberAuthenticated ? (
-          <>
-            <div className="flex flex-col md:flex-row w-full justify-center mt-2 px-4 md:px-24 gap-4 md:gap-8">
+          <> 
+            <div className="lg:px-24 lg:py-10 px-5 flex justify-center">
+              <Banners/>
+            </div>
+            <div className="flex flex-col md:flex-row w-full justify-center mt-2 px-4 md:px-24 gap-4 md:gap-8 items-center">
+              <div className="md:w-96 text-center">
+                <p className="font-bold text-2xl my-2 text-red-500">Descontos e ofertas</p>
+                <p className="text-white">Encontre as lojas com os melhores descontos e ofertas</p>
+              </div>
               <div className="md:w-72">
                 <label className="hidden md:block text-sm font-medium text-gray-900 dark:text-white">Palavra Chave</label>
                 <input type="text" id="first_name" value={palavraChave} onChange={(e: any) => setPalavraChave(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Palavra Chave" />
