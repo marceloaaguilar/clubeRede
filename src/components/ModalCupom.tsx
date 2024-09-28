@@ -25,7 +25,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, link, cupom, benefits, c
 
               {cupom !== '' ? 
                 <div>
-                  <p className="border-dashed border-2 w-56 p-2 mx-auto mb-4">{cupom}</p> 
+                  <p className="border-dashed border-2 max-w-100 p-2 mx-auto mb-4">{cupom}</p> 
                   <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Cupom de Desconto</h3>
                 </div>
               : ''}
