@@ -27,9 +27,9 @@ export default function SwiperCarousel() {
             </div>
             <div className="flex items-center justify-between p-3 h-full mt-16 card-meta">
               <div className="flex flex-col justify-between w-24 text-start">
-                <p className='font-regular text-2xl'>até</p>
-                <p className='text-4xl font-bold'>30%</p>
-                <p className='text-base'>de Desconto</p>
+                <p className='font-regular text-2xl text-white'>até</p>
+                <p className='text-4xl font-bold text-white'>30%</p>
+                <p className='text-base text-white'>de Desconto</p>
                 <a href="https://www.dominos.com.br/pages/order/?utm_source=auget&utm_campaign=aug" target='_blank' className="mt-4 bg-black text-white rounded-xl font-regular flex items-center justify-center p-1">
                   <div className='w-4 mx-px'>
                     <ShoppingCartIcon/>
