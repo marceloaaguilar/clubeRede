@@ -248,11 +248,11 @@ export default function Discounts() {
                 <p className="font-bold text-2xl my-2 text-red-500">Descontos e ofertas</p>
                 <p className="text-white">Encontre as lojas com os melhores descontos e ofertas</p>
               </div>
-              <div className="md:w-72">
+              <div className="w-[100%] md:w-72">
                 <label className="hidden md:block text-sm font-medium text-gray-900 dark:text-white">Palavra Chave</label>
                 <input type="text" id="first_name" value={palavraChave} onChange={(e: any) => setPalavraChave(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Palavra Chave" />
               </div>
-              <div className='md:w-72'>
+              <div className='w-[100%] md:w-72'>
                 <label className="hidden md:block text-sm font-medium text-gray-900 dark:text-white">Filtrar por Categoria</label>
                 <select value={filterCategory} onChange={(e: any) => setFilterCategory(e.target.value)} id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block h-[42px] w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                   <option value="placeholder" selected>Escolha uma Categoria</option>
