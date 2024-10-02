@@ -5,10 +5,13 @@ import Image from "next/image"
 import { useSearchParams } from 'next/navigation'
 import ModalCupom from "./ModalCupom"
 import { SpinningCircles } from 'react-loading-icons'
-import { GoSearch } from "react-icons/go";
+import { GoBlocked, GoSearch } from "react-icons/go";
 import Banners from "./Banners"
 
 import Unauthenticated from "./../../public/unauthenticated.svg"
+import { BiCloset, BiCross } from 'react-icons/bi'
+import { FcCancel } from 'react-icons/fc'
+import { MdCancel } from 'react-icons/md'
 
 const AES = require("crypto-js/aes")
 const CryptoJS = require("crypto-js");
@@ -18,8 +21,8 @@ const MEMBER_DATA_HASH_URL_PARAM = 'id'
 export default function Discounts() {
   const [listaEmpresas, setListaEmpresas] = useState<Empresa[]>([])
   const [empresas, setEmpresas] = useState<Empresa[]>([])
-  const [filterCategory, setFilterCategory] = useState()
-  const [palavraChave, setPalavraChave] = useState<string>()
+  const [filterCategory, setFilterCategory] = useState<string>('placeholder')
+  const [palavraChave, setPalavraChave] = useState<string | null>(null)
   const [isMemberAuthenticated, setIsMemberAuthenticated] = useState<boolean>(false);
   const [isMemberAuthenticationLoading, setIsMemberAuthenticationLoading] = useState<boolean>(false);
   const [statusModalCupom, setStatusModalCupom] = useState<boolean>(false);
@@ -81,22 +84,15 @@ export default function Discounts() {
     }
   }
 
-  const handleSearch = async (e: any) => {
-    if (palavraChave !== undefined) {
-      setEmpresas(listaEmpresas.filter((empresas) => empresas.palavrasChave?.includes(palavraChave.toLowerCase())))
-    }
-    if (filterCategory !== "placeholder" && filterCategory !== undefined) {
-      if (palavraChave !== undefined) {
-        setEmpresas(listaEmpresas.filter((empresas) => empresas.categoria == filterCategory && empresas.palavrasChave?.includes(palavraChave.toLowerCase())))
-        return
-      }
-      setEmpresas(listaEmpresas.filter((empresas) => empresas.categoria.includes(filterCategory)))
-    }
-
-    if (palavraChave === undefined && (filterCategory === undefined || filterCategory === 'placeholder')) {
-      setEmpresas(listaEmpresas)
-    }
-
+  const handleSearch = async () => {
+      setEmpresas(
+        listaEmpresas.filter(
+          (empresa) => (
+            (filterCategory === 'placeholder' ? true : (empresa.categoria.includes(filterCategory))) &&
+            (palavraChave ? empresa.palavrasChave?.includes(palavraChave.toLowerCase()) : true)
+          )
+        )
+      )
   }
 
   const buscaEmpresas = async () => {
@@ -250,7 +246,7 @@ export default function Discounts() {
               </div>
               <div className="w-[100%] md:w-72">
                 <label className="hidden md:block text-sm font-medium text-gray-900 dark:text-white">Palavra Chave</label>
-                <input type="text" id="first_name" value={palavraChave} onChange={(e: any) => setPalavraChave(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Palavra Chave" />
+                <input type="text" id="first_name" value={palavraChave ?? ''} onChange={(e: any) => setPalavraChave(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Palavra Chave" />
               </div>
               <div className='w-[100%] md:w-72'>
                 <label className="hidden md:block text-sm font-medium text-gray-900 dark:text-white">Filtrar por Categoria</label>
@@ -289,6 +285,19 @@ export default function Discounts() {
                 <span className="md:hidden">FILTRAR</span>
                 <GoSearch className='md:w-8 md:h-8 md:mt-[25px] w-6 h-6 md:hover:text-gray-300' />
               </button>
+              {/* <button
+                onClick={
+                  () => {
+                    setEmpresas(listaEmpresas)
+                    setFilterCategory('placeholder')
+                    setPalavraChave('')
+                  }
+                }
+                className='flex justify-center gap-4 w-full md:w-auto bg-red-700 hover:bg-red-800 md:bg-transparent md:hover:bg-transparent text-white font-bold py-2 px-4 md:p-0 rounded cursor-pointer'
+              >
+                <span className="md:hidden">DESFAZER</span>
+                <MdCancel className='md:w-8 md:h-8 md:mt-[25px] w-6 h-6 md:hover:text-gray-300' />
+              </button> */}
             </div>
             <div className="sm-grid flex flex-row flex-wrap gap-4 mt-5 px-4 justify-center">
               { 
