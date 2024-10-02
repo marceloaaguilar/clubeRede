@@ -90,7 +90,7 @@ export default function Discounts() {
         setEmpresas(listaEmpresas.filter((empresas) => empresas.categoria == filterCategory && empresas.palavrasChave?.includes(palavraChave.toLowerCase())))
         return
       }
-      setEmpresas(listaEmpresas.filter((empresas) => empresas.categoria == filterCategory))
+      setEmpresas(listaEmpresas.filter((empresas) => empresas.categoria.includes(filterCategory)))
     }
 
     if (palavraChave === undefined && (filterCategory === undefined || filterCategory === 'placeholder')) {
@@ -109,7 +109,7 @@ export default function Discounts() {
         { id: 6, nome: "Hering", categoria: "Roupas", logo: "/heringLogo.png", palavrasChave: "roupas,hering,moda", link: "https://hering.parceriasonline.com.br/clube-da-rede-veiculos"},
         { id: 7, nome: "Hóteis", categoria: "Hoteis", logo: "/djsnlcisjvisjncisdp.png", palavrasChave: "hóteis, rede de hoteis, hoteis.com, viagem, pousada", link: "https://hoteis.parceriasonline.com.br/clube-da-rede-veiculos" },
         { id: 8, nome: "Shoestock", categoria: "Tênis", logo: "/ligoShoestock.png", palavrasChave: "tenis,calçados,shoestock", link: "https://shoestock.parcerialink.com.br/cluberede" },
-        { id: 9, nome: "Movida", categoria: "AluguelCarros", logo: "/logoMovida250x250px.png", palavrasChave: "aluguel de carros,movida,carros", link: "https://movida.parcerialink.com.br/cluberede" },
+        { id: 9, nome: "Movida", categoria: "AluguelCarros, Automotivo", logo: "/logoMovida250x250px.png", palavrasChave: "aluguel de carros,movida,carros", link: "https://movida.parcerialink.com.br/cluberede" },
         { id: 10, nome: "Zattini", categoria: "Roupas", logo: "/clube-348.jpg", palavrasChave: "roupas,zattini,moda", link: "https://zattini.parcerialink.com.br/cluberede" },
         { id: 11, nome: "Vivara", categoria: "Joias", logo: "/vivara-logo.png", palavrasChave: "joias,vivara,pulseiras", link: "https://vivara.parcerialink.com.br/cluberede" },
         { id: 12, nome: "Centauro", categoria: "Tenis", logo: "/clube-422.jpg", palavrasChave: "esportes,centauro,atleta,tenis", link: "https://centauro.parceriasonline.com.br/clube-da-rede-veiculos" },
@@ -188,7 +188,7 @@ export default function Discounts() {
         { id: 92, nome: "Nacional Inn", link: "https://www.nacionalinn.com.br/", logo: "/logoNacionalInn.png", categoria: "Hotéis", palavrasChave: "hotel, viagens, hospedagem, viagem" },
         { id: 93, nome: "RDC Viagens", link: "https://rdcviagens.com.br/", logo: "/logoRDCViagens.png", categoria: "Viagens", palavrasChave: "viagens, pacotes, turismo, viagem, pousada" },
         { id: 94, nome: "Zion Semi Joias", link: "https://zionsemijoias.com.br/", logo: "/logoZionSemiJoias.png", categoria: "Joias", palavrasChave: "semijoias, joias, acessórios" },
-        { id: 95, nome: "Dollar", link: "https://iframe.sgrentals.com.br/iframe/home/?idUser=30891", logo: "/logoDollar.png", categoria: "Aluguel de Carros", palavrasChave: "carros, aluguel, transporte, viagem" },
+        { id: 95, nome: "Dollar", link: "https://iframe.sgrentals.com.br/iframe/home/?idUser=30891", logo: "/logoDollar.png", categoria: "AluguelCarros, Automotivo", palavrasChave: "carros, aluguel, transporte, viagem" },
         { id: 96, nome: "Rio Quente", link: "https://www.rioquente.com.br/", logo: "/logoRioQuente.png", categoria: "Turismo", palavrasChave: "resort, parque aquático, lazer, viagem, pousada" },
         { id: 97, nome: "Costa do Sauipe", link: "https://www.costadosauipe.com.br/", logo: "/logoCostaDoSauipe.png", categoria: "Turismo", palavrasChave: "resort, praia, lazer, viagem, pousada" },
         { id: 98, nome: "English Work", linkCupom: "https://englishwork.com.br/", cupom: "EWCLUBEREDE", benefits: "58% OFF no curso de inglês", logo: "/logoEnglishWork.png", categoria: "Educação", palavrasChave: "inglês, cursos, idiomas" },
@@ -196,9 +196,9 @@ export default function Discounts() {
         { id: 100, nome: "Sebrae", link: "https://sebrae.com.br/sites/PortalSebrae/cursosonline", cupom: "Não é necessário inserir cupom de desconto", logo: "/logoSebrae.png", categoria: "Educação", palavrasChave: "empreendedorismo, cursos, online" },
         { id: 101, nome: "Madesa", linkCupom: "https://www.madesa.com/", cupom: "CLUBEREDE", benefits: "7% OFF em todo o site, exceto montagem", logo: "/logoMadesa.png", categoria: "Móveis", palavrasChave: "móveis, decoração, casa" },
         { id: 102, nome: "Óticas On", link: "https://oticason.com.br/", logo: "/logoOticasOn.png", categoria: "Ópticas", palavrasChave: "óculos, lentes, acessórios" },
-        { id: 103, nome: "Unidas", linkCupom: "https://www.unidas.com.br/parceiro/clube-rede", cupom: "Desconto aplicado exclusivamente pelo link", benefits: "10% OFF em aluguel de carros", conditions: "Desconto aplicado sobre a diária de 01 até 29º dias.", validade: "Válido até 19/09/2025", logo: "/logoUnidas.png", categoria: "Aluguel de Carros", palavrasChave: "carros, aluguel, transporte, viagem" },
+        { id: 103, nome: "Unidas", linkCupom: "https://www.unidas.com.br/parceiro/clube-rede", cupom: "Desconto aplicado exclusivamente pelo link", benefits: "10% OFF em aluguel de carros", conditions: "Desconto aplicado sobre a diária de 01 até 29º dias.", validade: "Válido até 19/09/2025", logo: "/logoUnidas.png", categoria: "AluguelCarros, Automotivo", palavrasChave: "carros, aluguel, transporte, viagem" },
         { id: 104, nome: "Hot Park", link: "https://rioquente.com.vc/parque/hot-park/", logo: "/logoHotPark.png", categoria: "Parque Aquático", palavrasChave: "parque, diversão, lazer, viagem, pousada" },
-        { id: 105, nome: "Rent Cars", linkCupom: "https://www.rentcars.com/pt-br/?requestorid=8850&utm_source=www.agenciabelive.com.br&utm_medium=afiliado-link", cupom: "RCBELIVE5", benefits: "5% OFF", conditions: "Não válido para residentes EUA e Canadá", validade: "Válido até 31/12/2025", logo: "/logoRentCars.png", categoria: "Aluguel de Carros", palavrasChave: "carros, aluguel, viagens, viagem" },
+        { id: 105, nome: "Rent Cars", linkCupom: "https://www.rentcars.com/pt-br/?requestorid=8850&utm_source=www.agenciabelive.com.br&utm_medium=afiliado-link", cupom: "RCBELIVE5", benefits: "5% OFF", conditions: "Não válido para residentes EUA e Canadá", validade: "Válido até 31/12/2025", logo: "/logoRentCars.png", categoria: "AluguelCarros, Automotivo", palavrasChave: "carros, aluguel, viagens, viagem" },
         { id: 106, nome: "Meta", link: "https://pt-br.facebook.com/business/learn/courses", cupom: "Não é necessário inserir cupom de desconto", benefits: "100% OFF em cursos do site", logo: "/logoMeta.png", categoria: "Educação", palavrasChave: "cursos, facebook, marketing digital" },
         { id: 107, nome: "UVA", link: "https://graduacao.uva.br/extensao/?_ga=2.47309991.1428931641.1678403130-1781876364.1678403130", logo: "/logoUVA.png", categoria: "Educação", palavrasChave: "educação, cursos online, graduação" },
         { id: 108, nome: "Cruzeiro do Sul", link: "https://www.cruzeirodosulvirtual.com.br/", benefits: "100% OFF em cursos online", logo: "/logoCruzeirodoSul.png", categoria: "Educação", palavrasChave: "universidade, cursos, graduação" },
@@ -268,7 +268,6 @@ export default function Discounts() {
                   <option value="Entretenimento">Entretenimento</option>
                   <option value="Escolas">Escolas</option>
                   <option value="Esportes">Esportes</option>
-                  <option value="Faculdade">Faculdades</option>
                   <option value="Ferramentas">Ferramentas</option>
                   <option value="Flores">Flores</option>
                   <option value="Hoteis">Rede de Hóteis</option>

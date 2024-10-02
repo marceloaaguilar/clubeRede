@@ -1,28 +1,33 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
 import Image from 'next/image';
 import 'swiper/css';
 import 'swiper/css/scrollbar';
+import 'swiper/swiper-bundle.css';
 
 import { ShoppingCartIcon } from '@heroicons/react/outline';
 
 export default function SwiperCarousel() {
 
   return (
-    <div className="py-5 font-['Roboto'] lg:w-[1340px] w-full">
+    <div className="px-5 font-['Roboto'] lg:w-[1340px] w-full">
       <Swiper
         slidesPerView={1}
         spaceBetween={20}
-        navigation={true}
+        pagination={{
+          el: '.swiper-pagination',
+          clickable: true,
+        }}
         breakpoints={{
           640: { slidesPerView: 1 },
           768: { slidesPerView: 1 },
           1024: { slidesPerView: 3 },
         }}
-        className="mySwiper"
-      >
+        modules={[Pagination]}
+        className="mySwiper">
         <SwiperSlide >
           <div className="relative card-bg bg-cover bg-center bg-no-repeat rounded-lg" style={{ backgroundImage: "url('/banners/dominos.png')" }}>
-            <div className="absolute card-logo flex items-center justify-center -top-10 left-32 bg-white rounded-lg h-46 w-24 shadow-2xl">
+            <div className="absolute card-logo flex items-center justify-center -top-10 left-24 bg-white rounded-lg h-46 w-24 shadow-2xl">
               <Image src="/logos/logoDominos.png" alt="Domino's Logo" width={64} height={64} unoptimized/>
             </div>
             <div className="flex items-center justify-between p-3 h-full mt-16 card-meta">
@@ -145,6 +150,8 @@ export default function SwiperCarousel() {
             </div>
           </div>
         </SwiperSlide>
+
+        <div className="swiper-pagination"></div>
       </Swiper>
     </div>  
   
