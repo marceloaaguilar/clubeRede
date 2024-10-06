@@ -175,7 +175,7 @@ export default function Discounts() {
         { id: 83, nome: "De Marie Semi Joias", categoria: "moda", linkCupom: "https://www.demariesemijoias.com.br/", cupom: "BELIVE20", benefits: "20% OFF em todo o site", logo: "/logoDeMarieSemiJoias.png", palavrasChave: "joias, semijoias, acessórios" },
         { id: 84, nome: "Água de Cheiro", categoria: "moda", linkCupom: "https://www.aguadecheiro.com.br/", cupom: "REDE15", benefits: "15% OFF em todo site.", logo: "/logoAguadeCheiro.png", palavrasChave: "perfume, fragrâncias, beleza" },
         { id: 85, nome: "Caveira Suplementos", categoria: "saude", linkCupom: "https://www.caveirasuplementos.com.br/", cupom: "CLUBEREDE", benefits: "15% OFF em todo site.", logo: "/logoCaveiraSuplementos.png", palavrasChave: "suplementos, fitness, saúde" },
-        { id: 86, nome: "University RD Station", categoria: "educacao",  link: "https://university.rdstation.com/", cupom: "Não é necessário inserir cupom de desconto.", benefits: "100% OFF em cursos do site", logo: "/logoRDUniversity.png", palavrasChave: "cursos, marketing digital, educação" },
+        { id: 86, nome: "University RD Station", categoria: "educacao",  link: "https://university.rdstation.com/", cupom: "Não é necessário inserir cupom de desconto.", benefits: "100% OFF em cursos do site", logo: "/logoRdUniversity.png", palavrasChave: "cursos, marketing digital, educação" },
         { id: 87, nome: "Fundação Bradesco", link: "https://www.ev.org.br/", cupom: "Não é necessário inserir cupom de desconto.", benefits: "100% OFF em cursos do site", logo: "/logoFundacaoBradesco.png", categoria: "Educação", palavrasChave: "educação, cursos online, gratuito" },
         { id: 88, nome: "Sabrina Pratas", categoria: "moda" , linkCupom: "https://sabrinapratas.com/", cupom: "REDE15", benefits: "15% OFF em todo site.", logo: "/logoSabrinaPratas.png", palavrasChave: "pratas, semijoias, acessórios" },
         { id: 89, nome: "Monte Carlo", categoria: "moda", linkCupom: "https://montecarlo.parceriasonline.com.br/clube-da-rede-veiculos", cupom: "clubes12", benefits: "12% OFF em todo site", logo: "/logoMonteCarlo.png", palavrasChave: "joias, acessórios, luxo" },
@@ -197,7 +197,7 @@ export default function Discounts() {
         { id: 105, nome: "Rent Cars", categoria: "automotivo,viagem", linkCupom: "https://www.rentcars.com/pt-br/?requestorid=8850&utm_source=www.agenciabelive.com.br&utm_medium=afiliado-link", cupom: "RCBELIVE5", benefits: "5% OFF", conditions: "Não válido para residentes EUA e Canadá", validade: "Válido até 31/12/2025", logo: "/logoRentCars.png", palavrasChave: "carros, aluguel, viagens, viagem" },
         { id: 106, nome: "Meta", categoria: "educacao", link: "https://pt-br.facebook.com/business/learn/courses", cupom: "Não é necessário inserir cupom de desconto", benefits: "100% OFF em cursos do site", logo: "/logoMeta.png", palavrasChave: "cursos, facebook, marketing digital" },
         { id: 107, nome: "UVA", categoria: "educacao" , link: "https://graduacao.uva.br/extensao/?_ga=2.47309991.1428931641.1678403130-1781876364.1678403130", logo: "/logoUVA.png",  palavrasChave: "educação, cursos online, graduação" },
-        { id: 108, nome: "Cruzeiro do Sul", categoria: "educacao", link: "https://www.cruzeirodosulvirtual.com.br/", benefits: "100% OFF em cursos online", logo: "/logoCruzeirodoSul.png", palavrasChave: "universidade, cursos, graduação" },
+        { id: 108, nome: "Cruzeiro do Sul", categoria: "educacao", link: "https://www.cruzeirodosulvirtual.com.br/", benefits: "100% OFF em cursos online", logo: "/logoCruzeiroDoSul.png", palavrasChave: "universidade, cursos, graduação" },
         { id: 109, nome: "Fesn", categoria: "educacao", link: "https://vendas.alcaia.net/mariananevesdigital", benefits: "100% OFF em cursos online", logo: "/logoFESN.png", palavrasChave: "Educação, Cursos, Online" },
         { id: 110, nome: "Havanna", categoria: "gastronomia", linkCupom: "https://www.havanna.com.br/", cupom: "CLUBEREDE", benefits: "10% OFF em todo o site", logo: "/logoHavanna.png", palavrasChave: "Doces, Chocolates, Havanna" },
         { id: 111, nome: "Fisk", categoria: "educacao", link: "https://www.fisk.com.br/", benefits: "20% OFF no curso de inglês", logo: "/logoFisk.png", palavrasChave: "Inglês, Educação, Cursos" }
@@ -237,7 +237,7 @@ export default function Discounts() {
             <div className="lg:px-24 lg:py-10 px-5 flex justify-center">
               <Banners/>
             </div>
-            <div className="flex flex-col md:flex-row w-full justify-center mt-2 px-4 md:px-24 gap-4 md:gap-8 items-center">
+            <div className="flex flex-col md:flex-row w-full justify-center mt-6 px-4 md:px-24 gap-4 md:gap-8 items-center">
               <div className="md:w-96 text-center">
                 <p className="font-bold text-2xl my-2 text-red-500">Descontos e ofertas</p>
                 <p className="text-white">Encontre as lojas com os melhores descontos e ofertas</p>

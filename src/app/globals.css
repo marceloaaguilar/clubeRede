@@ -29,6 +29,10 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+.swiper-pagination-bullet{
+  background-color: #B91C1C !important;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

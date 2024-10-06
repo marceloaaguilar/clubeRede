@@ -119,7 +119,7 @@ export default function SwiperCarousel() {
                 <p className='font-regular text-2xl text-white'>até</p>
                 <p className='text-4xl font-bold  text-white'>15%</p>
                 <p className='text-base  text-white'>de Desconto</p>
-                <a href='https://zattini.parcerialink.com.br/cluberede' target='_blank' className="mt-4 bg-black text-white rounded-xl font-regular flex items-center justify-center p-1">
+                <a href='https://zattini.parcerialink.com.br/cluberede' target='_blank' className="mt-4 bg-black text-white rounded-xl font-regular flex items-center justify-center p-1 cursor-pointer">
                   <div className='w-4 mx-px'>
                     <ShoppingCartIcon/>
                   </div>
@@ -150,9 +150,8 @@ export default function SwiperCarousel() {
             </div>
           </div>
         </SwiperSlide>
-
-        <div className="swiper-pagination"></div>
       </Swiper>
+      <div className="swiper-pagination my-3 lg:my-2" style={{bottom: 'unset'}}></div>
     </div>  
   
   );
