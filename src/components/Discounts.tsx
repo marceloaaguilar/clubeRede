@@ -228,7 +228,16 @@ export default function Discounts() {
 
   useEffect(() => {
     setEmpresas(listaEmpresas)
-  }, [listaEmpresas])
+  }, [listaEmpresas]);
+
+  useEffect(()=> {
+    if (palavraChave && palavraChave.trim() !== "") {
+      setEmpresas(listaEmpresas.filter((data)=> data.palavrasChave.includes(palavraChave.toLowerCase())));
+      return;
+    }
+    buscaEmpresas();
+
+  },[palavraChave]);
 
   return (
     <div id="descontos">
