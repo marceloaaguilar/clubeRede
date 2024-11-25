@@ -95,8 +95,8 @@ export default function Discounts() {
       )
   }
 
-  const buscaEmpresas = async () => {
-    await setListaEmpresas(
+  const buscaEmpresas = () => {
+    setListaEmpresas(
       [  
         { id: 1, nome: "Riachuelo", categoria: "moda", logo: "/logoRiachuelo.png", palavrasChave: "roupas,riachuelo,moda", link: "https://riachuelo.parceriasonline.com.br/clube-da-rede-veiculos" },
         { id: 3, nome: "Ponto", categoria: "ecommerce", logo: "/ponto_pontofrio.jpg", palavrasChave: "eletrodomésticos, ponto, ponto frio", link: "https://pontofrio.parcerialink.com.br/cluberede" },
@@ -223,12 +223,10 @@ export default function Discounts() {
   const closeModal = () => setStatusModalCupom(false);
 
   useEffect(() => {
+    buscaEmpresas()
+
     const memberDataHashParamValue = searchParams.get(MEMBER_DATA_HASH_URL_PARAM)
     checkIfIsMemberAuthenticated(memberDataHashParamValue ? memberDataHashParamValue.replaceAll(' ', '+') : null)
-  }, [])
-
-  useEffect(() => {
-    buscaEmpresas()
   }, [])
 
   useEffect(() => {
