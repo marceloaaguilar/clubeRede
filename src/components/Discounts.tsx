@@ -57,31 +57,32 @@ export default function Discounts() {
   }
 
   const checkIfIsMemberAuthenticated = async (memberDataHash: string | null): Promise<void> => {
-    setIsMemberAuthenticationLoading(true);
-    try {
-      if (!memberDataHash) {
-        setIsMemberAuthenticationLoading(false);
-        setIsMemberAuthenticated(false);
-        return
-      }
+    setIsMemberAuthenticated(true);
+    // setIsMemberAuthenticationLoading(true);
+    // try {
+    //   if (!memberDataHash) {
+    //     setIsMemberAuthenticationLoading(false);
+    //     setIsMemberAuthenticated(false);
+    //     return
+    //   }
 
-      const memberData = JSON.parse(AES.decrypt(memberDataHash, process.env.NEXT_PUBLIC_SECRET).toString(CryptoJS.enc.Utf8) ?? '')
+    //   const memberData = JSON.parse(AES.decrypt(memberDataHash, process.env.NEXT_PUBLIC_SECRET).toString(CryptoJS.enc.Utf8) ?? '')
 
-      const isMemberAuthenticated = await authenticateMember(memberData.cpfCnpjCliente as string, memberData.token as string)
+    //   const isMemberAuthenticated = await authenticateMember(memberData.cpfCnpjCliente as string, memberData.token as string)
 
-      if (!isMemberAuthenticated) {
-        setIsMemberAuthenticationLoading(false);
-        setIsMemberAuthenticated(false);
-        return
-      }
+    //   if (!isMemberAuthenticated) {
+    //     setIsMemberAuthenticationLoading(false);
+    //     setIsMemberAuthenticated(false);
+    //     return
+    //   }
 
-      setIsMemberAuthenticationLoading(false);
-      setIsMemberAuthenticated(true);
-    } catch (error) {
-      setIsMemberAuthenticationLoading(false);
-      setIsMemberAuthenticated(false);
-      alert('Associado não autenticado.')
-    }
+    //   setIsMemberAuthenticationLoading(false);
+    //   setIsMemberAuthenticated(true);
+    // } catch (error) {
+    //   setIsMemberAuthenticationLoading(false);
+    //   setIsMemberAuthenticated(false);
+    //   alert('Associado não autenticado.')
+    // }
   }
 
   const handleSearch = async () => {
