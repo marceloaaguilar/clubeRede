@@ -1,4 +1,4 @@
-'use server';
+'use server'
 import nodemailer from 'nodemailer';
 const SMTP_SERVER_HOST = process.env.NEXT_PUBLIC_SMTP_SERVER_HOST;
 const SMTP_SERVER_USERNAME = process.env.NEXT_PUBLIC_SMTP_SERVER_USERNAME;

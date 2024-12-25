@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
 import { sendMail } from "./sendMail/sendMail";
 import { ClipLoader } from 'react-spinners';
-import Lottie from 'lottie-react';
-import successAnimation from './sendMail/success-animation.json'
+import successAnimation from "./sendMail/success-animation.json";
 import mountHtmlEmail from "./MountHtmlEmail";
+import dynamic from 'next/dynamic';
 
-export default function ModalReport(props:any) {
-  const [name,setName] = useState("");
-  const [phone,setPhone] = useState("");
-  const [message,setMessage] = useState("");
-  const [showRequiredField,setShowRequiredField] = useState(false);
+const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
+
+const ModalReport: React.FC<any>  = (props: any) =>  {
+
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
+  const [showRequiredField, setShowRequiredField] = useState(false);
   const [sendingEmail, setSendingEmail] = useState("");
 
-  const handleSubmit = async (e:any) => {
-    
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     if (!name || !phone || !message) {
@@ -28,25 +30,25 @@ export default function ModalReport(props:any) {
         setSendingEmail("success");
       }
     });
-  }
+  };
 
-  useEffect(()=> {
+  useEffect(() => {
     setName("");
     setPhone("");
     setMessage("");
     setSendingEmail("");
-
   }, [props.isOpen === false]);
 
-  useEffect(()=> {
-
+  useEffect(() => {
     if (phone) {
-      setPhone(phone.replace(/\D/g, '') 
-      .replace(/(\d{2})(\d)/, '($1) $2') 
-      .replace(/(\d{5})(\d{1,4})$/, '$1-$2'));
+      setPhone(
+        phone
+          .replace(/\D/g, "")
+          .replace(/(\d{2})(\d)/, "($1) $2")
+          .replace(/(\d{5})(\d{1,4})$/, "$1-$2")
+      );
     }
-
-  },[phone])
+  }, [phone]);
 
   return (
     props.isOpen? (
@@ -128,3 +130,5 @@ export default function ModalReport(props:any) {
     ): ''
   )
 }
+
+export default ModalReport
