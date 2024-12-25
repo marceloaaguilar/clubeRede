@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { sendMail } from "./sendMail/sendMail";
-import mountHtmlEmail from "./mountHtmlEmail";
 import { ClipLoader } from 'react-spinners';
 import Lottie from 'lottie-react';
 import successAnimation from './sendMail/success-animation.json'
+import mountHtmlEmail from "./MountHtmlEmail";
 
 export default function ModalReport(props:any) {
   const [name,setName] = useState("");
