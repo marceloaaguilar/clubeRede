@@ -29,7 +29,8 @@ export async function sendMail(subject:string, html?:string){
     from: SITE_MAIL_SENDER,
     to: SITE_MAIL_RECIEVER,
     text: "Solicitação de suporte",
-    html: html ? html : ''
+    html: html ? html : '',
+    cc: "Admmpsolucoes01@gmail.com"
   });
 
   return info.messageId;

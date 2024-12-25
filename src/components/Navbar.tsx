@@ -19,7 +19,7 @@ export default function Navbar(){
           <Image unoptimized src="/logo_Clube_Rede.png" alt="Logo Clube Rede" width={50} height={50} />
         </div>
         <div>
-          <p onClick={()=> setShowModalReport(true)} className="text-xs cursor-pointer">Reportar cupom</p>
+          <p onClick={()=> setShowModalReport(true)} className="text-xs cursor-pointer">Suporte</p>
         </div>
         {/* <div className="md:hidden">
           <button onClick={() => setShowMenu(!showMenu)} type="button" className="inline-flex items-center justify-center p-2 text-gray-500 rounded-lg focus:text-white focus:outline-none">
