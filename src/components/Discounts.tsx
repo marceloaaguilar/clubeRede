@@ -59,32 +59,31 @@ export default function Discounts() {
   }
 
   const checkIfIsMemberAuthenticated = async (memberDataHash: string | null): Promise<void> => {
-    setIsMemberAuthenticated(true);
-    // setIsMemberAuthenticationLoading(true);
-    // try {
-    //   if (!memberDataHash) {
-    //     setIsMemberAuthenticationLoading(false);
-    //     setIsMemberAuthenticated(false);
-    //     return
-    //   }
+    setIsMemberAuthenticationLoading(true);
+    try {
+      if (!memberDataHash) {
+        setIsMemberAuthenticationLoading(false);
+        setIsMemberAuthenticated(false);
+        return
+      }
 
-    //   const memberData = JSON.parse(AES.decrypt(memberDataHash, process.env.NEXT_PUBLIC_SECRET).toString(CryptoJS.enc.Utf8) ?? '')
+      const memberData = JSON.parse(AES.decrypt(memberDataHash, process.env.NEXT_PUBLIC_SECRET).toString(CryptoJS.enc.Utf8) ?? '')
 
-    //   const isMemberAuthenticated = await authenticateMember(memberData.cpfCnpjCliente as string, memberData.token as string)
+      const isMemberAuthenticated = await authenticateMember(memberData.cpfCnpjCliente as string, memberData.token as string)
 
-    //   if (!isMemberAuthenticated) {
-    //     setIsMemberAuthenticationLoading(false);
-    //     setIsMemberAuthenticated(false);
-    //     return
-    //   }
+      if (!isMemberAuthenticated) {
+        setIsMemberAuthenticationLoading(false);
+        setIsMemberAuthenticated(false);
+        return
+      }
 
-    //   setIsMemberAuthenticationLoading(false);
-    //   setIsMemberAuthenticated(true);
-    // } catch (error) {
-    //   setIsMemberAuthenticationLoading(false);
-    //   setIsMemberAuthenticated(false);
-    //   alert('Associado não autenticado.')
-    // }
+      setIsMemberAuthenticationLoading(false);
+      setIsMemberAuthenticated(true);
+    } catch (error) {
+      setIsMemberAuthenticationLoading(false);
+      setIsMemberAuthenticated(false);
+      alert('Associado não autenticado.')
+    }
   }
 
   const handleSearch = async () => {
@@ -140,7 +139,7 @@ export default function Discounts() {
         { id: 41, nome: "Ikesaki", categoria: "moda", logo: "/logoIkesaki.png", palavrasChave: "ikesaki, beleza", link: "https://ikesaki.parceriasonline.com.br/clube-da-rede-veiculos" },
         { id: 42, nome: "Jequiti", categoria: "moda", logo: "/logoJequiti.png", palavrasChave: "jequiti, cosméticos", link: "https://jequiti.parceriasonline.com.br/clube-da-rede-veiculos" },
         { id: 43, nome: "Kaspersky", categoria: "servicos", logo: "/logoKaspersky.png", palavrasChave: "kaspersky, segurança", link: "https://kaspersky.parceriasonline.com.br/clube-da-rede-veiculos" },
-        { id: 46, nome: "Liv Up", categoria: "gastronomia", logo: "/logoLivUp.png", palavrasChave: "liv up, alimentos", link: "https://liv-up.parceriasonline.com.br/clube-da-rede-veiculos" },
+        // { id: 46, nome: "Liv Up", categoria: "gastronomia", logo: "/logoLivUp.png", palavrasChave: "liv up, alimentos", link: "https://liv-up.parceriasonline.com.br/clube-da-rede-veiculos" },
         { id: 47, nome: "Marcyn", categoria: "moda", logo: "/logoMarcyn.png", palavrasChave: "marcyn, roupas", link: "https://marcyn.parceriasonline.com.br/clube-da-rede-veiculos" },
         // { id: 48, nome: "Multilaser", categoria: "ecommerce", logo: "/logoMultilaser.png", palavrasChave: "multilaser, tecnologia", link: "https://multilaser.parceriasonline.com.br/clube-da-rede-veiculos" },
         { id: 49, nome: "Natura", categoria: "moda", logo: "/logoNatura.png", palavrasChave: "natura, cosméticos", link: "https://natura.parceriasonline.com.br/clube-da-rede-veiculos" },
@@ -209,6 +208,7 @@ export default function Discounts() {
         { id: 114, nome: "Prontolight", categoria: "gastronomia", linkCupom: "https://prontolight.com/", cupom:"AUGDESC13", benefits:"20% de desconto no site", conditions:"Cupom não cumulativo com as promoções do site. O cupom não é válido para combos, assinaturas, programa 'vou secar' e demais programas", logo: "/prontolight.jpeg", palavrasChave: "comida, fit, fitness, comida congelada, emagrecimento, prontolight" },
         { id: 115, nome: "Consultoria de Imagem Diva", categoria: "moda", linkCupom: "https://consultoriadiva.com/", cupom:"SOUDIVA ", conditions:"Necessário entrar em contato pelo Whatsapp 11 98609-1474 e informar cupom SOUDIVA 15% desconto através da parceria para pagamento no Pix na Consultoria de Imagem", logo: "/consultoriadiva.jpeg", palavrasChave: "consultoria imagem, diva, autoestima, cabelo, roupa, maquiagem, coloração" },
         { id: 116, nome: "Chefão parabrisas", categoria: "Automotivo", linkCupom: "https://w.app/XQgn1m", cupom:"Não é necessário inserir cupom de desconto.", benefits:"5% de descontos Vidros Automotivos em Geral", conditions: "Necessário informar ser Associado do Clube Rede para obter os descontos. Válido para qualquer forma de pagamento. Atendimento em Domicilio em Todo o Rio de Janeiro. Orçamento e agendamento pelo telefone 21 97353-2211", logo: "/chefaoParabrisas.jpeg", palavrasChave: "parabrisa, vidro, retrovisor" },
+        { id: 117, nome: "Imaginarium", categoria: "Ecommerce", linkCupom: "https://imaginarium.parceriasonline.com.br/clube-da-rede-veiculos", cupom:"QUERO10IMG", benefits:"10% de desconto em todo site.", conditions: "Desconto válido para os itens vendidos e entregues por Imaginarium, não acumulativo. Disponível somente nas modalidades de entrega pelo site. Cupom aplicado após inclusão do CEP de entrega.", logo: "/logoImaginarium.png", palavrasChave: "imaginarium, presentes" },
       ]
     )
   }
