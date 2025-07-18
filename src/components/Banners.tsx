@@ -10,7 +10,7 @@ import { ShoppingCartIcon } from '@heroicons/react/outline';
 export default function SwiperCarousel() {
 
   return (
-    <div className="px-5 font-['Roboto'] lg:w-[1340px] w-full">
+    <div className="px-5 font-['Roboto'] w-full">
       <Swiper
         slidesPerView={1}
         spaceBetween={20}

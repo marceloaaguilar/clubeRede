@@ -36,9 +36,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, link, cupom, benefits, c
                 { validade ? <p className="my-2"><strong>Validade: </strong> {validade}</p> : ''}
               </div>
 
-              
-              
-
               <a href={link} target="_blank" type="button" className="bg-red-700 hover:bg-red-800 text-white font-bold mx-6 my-4 py-2 px-4 rounded">
                Acessar Loja
               </a>
@@ -47,6 +44,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, link, cupom, benefits, c
         </div>
       </div>
     );
-  };
+};
   
-  export default Modal;
+export default Modal;

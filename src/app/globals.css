@@ -33,6 +33,11 @@ body {
   background-color: #B91C1C !important;
 }
 
+ .swiper-button-next, .swiper-button-prev {
+  color: #B91C1C !important;
+ }
+
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
