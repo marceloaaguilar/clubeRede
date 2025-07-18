@@ -12,10 +12,11 @@ export default function ModalVoucher({ isOpen, onClose, vouchers, onChange}:Moda
 
   const {items, addItems} = useCart();
   const [showAlert, setShowAlert] = useState(false);
+  
+  const router = useRouter();
 
   if (!isOpen || !vouchers) return;
   
-  const router = useRouter();
 
   const handleVoucherQuantity = (quantity:number, id:string) => {
 
