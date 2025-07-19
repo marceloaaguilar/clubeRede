@@ -121,7 +121,7 @@ export default function CinemaPage() {
         </div> 
 
         : <div className="bg-black min-h-screen text-white overflow-x-hidden">
-            <div className="px-6 py-4">
+            <div className="px-6 py-4 sm:text-left text-center">
               <p className="font-bold text-2xl mb-4 text-red-500">Encontre seu filme</p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
