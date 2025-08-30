@@ -210,7 +210,7 @@ export default function Checkout(){
               <div className="lg:col-span-2 w-full">
 
                 {stage === "form" && items.map((item, index) => (
-                  <div key={index} className="border border-gray-200 dark:border-gray-600 rounded-lg mb-4 px-2 select-none">
+                  <div key={index} className="border border-gray-600 dark:border-gray-600 rounded-lg mb-4 px-2 select-none">
 
                     <div className="flex flex-col sm:flex-row sm:h-24 px-4 sm:px-10 py-2 relative">
 
@@ -224,15 +224,15 @@ export default function Checkout(){
 
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between w-full gap-2">
                         <div>
-                          <h2 className="text-base sm:text-xl font-bold text-gray-800 dark:text-white">{item.title}</h2>
-                          <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">{item.description}</p>
+                          <h2 className="text-base sm:text-xl font-bold text-white dark:text-white">{item.title}</h2>
+                          <p className="text-sm text-gray-300 dark:text-gray-300 mt-1">{item.description}</p>
                         </div>
 
                         <div>
                           <span>Quantidade: {item.quantity || 0}</span>
                         </div>
 
-                        <p className="text-base sm:text-xl text-gray-800 dark:text-gray-100 font-bold">
+                        <p className="text-base sm:text-xl text-gray-100 dark:text-gray-100 font-bold">
                           R$ {item.paymentValue.toString().replace(".", ",")}
                         </p>
                       </div>
@@ -243,10 +243,10 @@ export default function Checkout(){
                 ))}
 
                 {stage === "personalData" && (
-                  <div className="border border-gray-200 dark:border-gray-600 rounded-lg mb-4 select-none">
+                  <div className="border border-gray-600 dark:border-gray-600 rounded-lg mb-4 select-none">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-800 dark:text-white p-4 ">Dados pessoais</h3>
-                      <hr className="border-gray-300 dark:border-gray-700" />
+                      <h3 className="text-lg font-semibold text-white dark:text-white p-4 ">Dados pessoais</h3>
+                      <hr className="border-gray-700 dark:border-gray-700" />
                     </div>
 
                     <div className="py-6 px-8">
@@ -344,10 +344,10 @@ export default function Checkout(){
                 )}
 
                 {stage === "payment" && (
-                  <div className="border border-gray-200 dark:border-gray-600 rounded-lg mb-4 select-none">
+                  <div className="border border-gray-600 dark:border-gray-600 rounded-lg mb-4 select-none">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-800 dark:text-white p-4">Pagamento</h3>
-                      <hr className="border-gray-300 dark:border-gray-700" />
+                      <h3 className="text-lg font-semibold text-white dark:text-white p-4">Pagamento</h3>
+                      <hr className="border-gray-600 dark:border-gray-600" />
                     </div>
 
                     <div className="py-6 px-8 space-y-6">
@@ -369,7 +369,7 @@ export default function Checkout(){
                           className={`flex-1 py-2 rounded font-bold border ${
                             paymentMethod === "credit"
                               ? "bg-red-700 text-white"
-                              : "bg-white dark:bg-neutral-800 border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white"
+                              : "bg-neutral-800 dark:bg-neutral-800 border-gray-600 dark:border-gray-600 text-white dark:text-white"
                           }`}
                         >
                           Cartão de Crédito
@@ -382,8 +382,8 @@ export default function Checkout(){
                           <div>
 
                             <div>
-                              <h4 className="text-lg font-semibold text-gray-800 dark:text-white ">Dados do Cartão</h4>
-                              <hr className="border-gray-300 dark:border-gray-700 pb-4" />
+                              <h4 className="text-lg font-semibold text-white dark:text-white ">Dados do Cartão</h4>
+                              <hr className="border-gray-700 dark:border-gray-700 pb-4" />
                             </div>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -447,8 +447,8 @@ export default function Checkout(){
                           <div className="pt-6">
 
                             <div>
-                              <h4 className="text-lg font-semibold text-gray-800 dark:text-white ">Endereço de Cobrança</h4>
-                              <hr className="border-gray-300 dark:border-gray-700 pb-4" />
+                              <h4 className="text-lg font-semibold text-white dark:text-white ">Endereço de Cobrança</h4>
+                              <hr className="border-gray-700 dark:border-gray-700 pb-4" />
                             </div>
 
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -546,7 +546,7 @@ export default function Checkout(){
               </div>
 
               {stage !== "success" &&
-                <div className="h-fit border border-gray-200 dark:border-gray-600 rounded-lg flex flex-col items-center justify-center select-none p-6">
+                <div className="h-fit border border-gray-600 dark:border-gray-600 rounded-lg flex flex-col items-center justify-center select-none p-6">
 
                   <div className="flex flex-col justify-between w-full">
 

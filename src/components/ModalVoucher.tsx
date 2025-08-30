@@ -20,6 +20,8 @@ export default function ModalVoucher({ isOpen, onClose, vouchers, onChange}:Moda
 
   const handleVoucherQuantity = (quantity:number, id:string) => {
 
+    if (quantity > 4) return;
+
     let voucherWithUpdatedQuantity = vouchers.map((voucher)=> {
 
       if (voucher.id === id) {
@@ -58,7 +60,7 @@ export default function ModalVoucher({ isOpen, onClose, vouchers, onChange}:Moda
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center w-full h-screen bg-black bg-opacity-50">
       <div className="relative p-4 w-full max-w-2xl max-h-[80vh]">
-        <div className="relative bg-white rounded-lg shadow dark:bg-gray-800">
+        <div className="relative bg-gray-800 rounded-lg shadow dark:bg-gray-800">
           <button
             type="button"
             onClick={onClose}
@@ -81,25 +83,25 @@ export default function ModalVoucher({ isOpen, onClose, vouchers, onChange}:Moda
 
                 {vouchers.map((voucher, index) => (
 
-                  <div key={index} className="border border-gray-200 dark:border-gray-600 rounded-lg p-4 select-none">
+                  <div key={index} className="border border-gray-600 dark:border-gray-600 rounded-lg p-4 select-none">
                     <div className="flex justify-between items-center">
 
                       <div>
-                        <h2 className="text-xl font-bold text-gray-800 dark:text-white">{voucher.title}</h2>
-                        <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">{voucher.description}</p>
+                        <h2 className="text-xl font-bold text-white dark:text-white">{voucher.title}</h2>
+                        <p className="text-sm text-gray-300 dark:text-gray-300 mt-1">{voucher.description}</p>
                         {/* <p className="text-sm text-gray-600 dark:text-gray-300 mt-2"><strong>Regras:</strong> {voucher.rules}</p> */}
-                        <p className="text-xl text-gray-800 dark:text-gray-100 mt-2 font-bold">R$ {voucher.paymentValue.toString().replace(".", ',')}</p>
+                        <p className="text-xl text-gray-100 dark:text-gray-100 mt-2 font-bold">R$ {voucher.paymentValue.toString().replace(".", ',')}</p>
                       </div>
 
                       <div className="flex justify-between items-center">
 
-                        <div className="p-2 mx-2 bg-red-700 hover:bg-red-900 rounded-md cursor-pointer" onClick={() => {voucher.quantity && handleVoucherQuantity(voucher.quantity - 1, voucher.id)}}>
+                        <div className="p-2 mx-2 bg-red-700 hover:bg-red-900 rounded-md cursor-pointer text-white" onClick={() => {voucher.quantity && handleVoucherQuantity(voucher.quantity - 1, voucher.id)}}>
                           <FaMinus/>
                         </div>
 
-                        <span>{voucher.quantity || 0}</span>
+                        <span className="text-white">{voucher.quantity || 0}</span>
 
-                        <div className="p-2 mx-2 bg-red-700 hover:bg-red-900 rounded-md cursor-pointer" onClick={() => handleVoucherQuantity((voucher.quantity || 0) + 1, voucher.id)}>
+                        <div className="p-2 mx-2 bg-red-700 hover:bg-red-900 rounded-md cursor-pointer text-white" onClick={() => handleVoucherQuantity((voucher.quantity || 0) + 1, voucher.id)}>
                           <FaPlus/>
                         </div>
 
@@ -125,7 +127,7 @@ export default function ModalVoucher({ isOpen, onClose, vouchers, onChange}:Moda
 
               </div>
               
-            </> : <div className="p-10 overflow-y-auto max-h-[65vh] space-y-4"><p> Não foram encontrados vouchers disponíveis para esse estabelecimento!</p></div> 
+            </> : <div className="p-10 overflow-y-auto text-white max-h-[65vh] space-y-4"><p> Não foram encontrados vouchers disponíveis para esse estabelecimento!</p></div> 
           }
 
           {showAlert && (
