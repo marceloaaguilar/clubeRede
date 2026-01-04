@@ -5,6 +5,7 @@ import { ValidationModal } from "@/components/ValidationModal";
 import { useCart } from "@/context/CartProvider";
 import { useEffect, useState } from "react";
 import { OrbitProgress } from "react-loading-indicators";
+import { useMercadoPago } from "@/hooks/useMercadoPago";
 
 import successAnimation from "../../../components/sendMail/success-animation.json";
 import dynamic from "next/dynamic";
@@ -38,6 +39,7 @@ export default function Checkout(){
   const [cardNumber, setCardNumber] = useState("");
   const [expiry, setExpiry] = useState("");
   const [cvv, setCvv] = useState("");
+  const [cardBrand, setCardBrand] = useState<string | null>(null);
   
   const [postalCode, setPostalCode] = useState("");
   const [number, setNumber] = useState("");
@@ -45,6 +47,25 @@ export default function Checkout(){
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
+
+  // PIX state
+  const [pixData, setPixData] = useState<{ qrCode: string; qrCodeBase64: string; expirationDate: string } | null>(null);
+
+  // Mercado Pago SDK
+  const { isLoaded: mpIsLoaded, isLoading: mpIsLoading, error: mpError, createCardToken, getPaymentMethod } = useMercadoPago();
+
+  // Detect card brand as user types
+  useEffect(() => {
+    const detectBrand = async () => {
+      if (cardNumber.length >= 6 && mpIsLoaded) {
+        const paymentMethod = await getPaymentMethod(cardNumber);
+        setCardBrand(paymentMethod?.id || null);
+      } else {
+        setCardBrand(null);
+      }
+    };
+    detectBrand();
+  }, [cardNumber, mpIsLoaded, getPaymentMethod]);
 
 
 
@@ -59,67 +80,26 @@ export default function Checkout(){
     setStage("payment");
   }
 
-  const handleConfirmPayment = async () =>  {
-
-    let vouchers = items.map((item) => ({ id: item.id, quantity: item.quantity }));
-
-    const payload = {  
-      "clientData": {
-        "name": name, 
-        "cpfCnpj": cpf.replace(/\D/g, ''),
-        "email": email,
-        "phone": phone,
-        "notificationDisabled": true
-      },
-      "creditCard": {},
-      "creditCardHolderInfo": {},
-      "vouchers": vouchers,
-      "paymentMethod": "CREDIT_CARD"
-    }
+  const handleConfirmPayment = async () => {
+    const vouchers = items.map((item) => ({ id: item.id, quantity: item.quantity }));
 
     if (paymentMethod === "pix") {
-      setStage("pix");
-
-    } else {
-      
-      if (!cardName || !cardNumber || !expiry || !cvv) {
-        setModalMessage("Preencha todos os dados do cartão.");
-        setModalOpen(true);
-        return;
-      }
-
-      let expiryData = expiry.split("/");
-      let monthExpiry = expiryData[0];
-      let yearExpiry = expiryData[1];
-      
-      payload.creditCard = {
-        "holderName": cardName,
-        "number": cardNumber,
-        "expiryMonth": monthExpiry,
-        "expiryYear": yearExpiry,
-        "ccv": cvv
-      };
-
-      payload.creditCardHolderInfo = {
-        "name": cardName,
-        "email": email,
-        "cpfCnpj": cpf,
-        "postalCode": postalCode.replace("-", ""),
-        "addressNumber": number,
-        "addressComplement": complement,
-        "phone": phone
-      };
-
-      if (!monthExpiry || !yearExpiry) {
-        setModalMessage("Preencha a validade do cartão corretamente.");
-        setModalOpen(true);
-        return;
-      }
-
+      // Handle PIX payment
       setIsLoading(true);
-      setIsLoadingMessage("Processando compra...");
+      setIsLoadingMessage("Gerando QR Code PIX...");
 
       try {
+        const payload = {
+          clientData: {
+            name: name,
+            cpfCnpj: cpf.replace(/\D/g, ''),
+            email: email,
+            phone: phone,
+            notificationDisabled: true
+          },
+          vouchers: vouchers,
+          paymentMethod: "PIX"
+        };
 
         const response = await fetch(`${process.env.NEXT_PUBLIC_CLUBE_CINEMA_URL}/voucher/book`, {
           method: 'POST',
@@ -129,24 +109,110 @@ export default function Checkout(){
           },
           body: JSON.stringify(payload)
         });
-  
+
         const result = await response.json();
 
         if (!response.ok) {
-          setModalMessage(result.error);
+          setModalMessage(result.message || result.error || 'Erro ao gerar PIX');
           setModalOpen(true);
           return;
         }
-        
-        setStage("success");
+
+        // Set PIX data and move to PIX stage
+        setPixData(result.pixData);
+        setStage("pix");
 
       } catch (error) {
-        console.error("Ocorreu um erro durante o pagamento");
+        console.error("Erro ao gerar PIX:", error);
+        setModalMessage("Erro ao gerar QR Code PIX. Tente novamente.");
+        setModalOpen(true);
       } finally {
-        setIsLoading(false)
+        setIsLoading(false);
       }
 
+    } else {
+      // Handle CREDIT_CARD payment with Mercado Pago tokenization
+      if (!mpIsLoaded) {
+        setModalMessage(mpError || "Aguarde o carregamento do sistema de pagamento...");
+        setModalOpen(true);
+        return;
+      }
 
+      if (!cardName || !cardNumber || !expiry || !cvv) {
+        setModalMessage("Preencha todos os dados do cartão.");
+        setModalOpen(true);
+        return;
+      }
+
+      const expiryData = expiry.split("/");
+      const monthExpiry = expiryData[0];
+      const yearExpiry = expiryData[1];
+
+      if (!monthExpiry || !yearExpiry || monthExpiry.length !== 2 || yearExpiry.length !== 2) {
+        setModalMessage("Preencha a validade do cartão corretamente (MM/AA).");
+        setModalOpen(true);
+        return;
+      }
+
+      setIsLoading(true);
+      setIsLoadingMessage("Validando cartão...");
+
+      try {
+        // Tokenize card with Mercado Pago SDK
+        const tokenResult = await createCardToken({
+          cardNumber: cardNumber,
+          cardholderName: cardName,
+          expirationMonth: monthExpiry,
+          expirationYear: yearExpiry,
+          securityCode: cvv,
+          identificationType: 'CPF',
+          identificationNumber: cpf,
+        });
+
+        setIsLoadingMessage("Processando pagamento...");
+
+        // Send tokenized payment to backend
+        const payload = {
+          clientData: {
+            name: name,
+            cpfCnpj: cpf.replace(/\D/g, ''),
+            email: email,
+            phone: phone,
+            notificationDisabled: true
+          },
+          token: tokenResult.token,
+          paymentMethodId: tokenResult.paymentMethodId,
+          installments: 1,
+          vouchers: vouchers,
+          paymentMethod: "CREDIT_CARD"
+        };
+
+        const response = await fetch(`${process.env.NEXT_PUBLIC_CLUBE_CINEMA_URL}/voucher/book`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${process.env.NEXT_PUBLIC_CLUBE_CINEMA_TOKEN}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          setModalMessage(result.message || result.error || 'Erro ao processar pagamento');
+          setModalOpen(true);
+          return;
+        }
+
+        setStage("success");
+
+      } catch (error: any) {
+        console.error("Erro no pagamento:", error);
+        setModalMessage(error.message || "Erro ao processar pagamento. Verifique os dados do cartão.");
+        setModalOpen(true);
+      } finally {
+        setIsLoading(false);
+      }
     }
   }
 
@@ -352,17 +418,16 @@ export default function Checkout(){
 
                     <div className="py-6 px-8 space-y-6">
                       <div className="flex gap-4">
-{/* 
                         <button
                           onClick={() => setPaymentMethod("pix")}
                           className={`flex-1 py-2 rounded font-bold border ${
                             paymentMethod === "pix"
                               ? "bg-red-700 text-white"
-                              : "bg-white dark:bg-neutral-800 border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white"
+                              : "bg-neutral-800 dark:bg-neutral-800 border-gray-600 dark:border-gray-600 text-white dark:text-white"
                           }`}
                         >
                           PIX
-                        </button> */}
+                        </button>
 
                         <button
                           onClick={() => setPaymentMethod("credit")}
@@ -531,6 +596,71 @@ export default function Checkout(){
                         className="w-full bg-red-700 hover:bg-red-800 text-white font-bold rounded py-2"
                       >
                         {paymentMethod === "pix" ? "Gerar QR Code PIX" : "Confirmar Pagamento"}
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {stage === "pix" && pixData && (
+                  <div className="border border-gray-600 dark:border-gray-600 rounded-lg mb-4 select-none">
+                    <div>
+                      <h3 className="text-lg font-semibold text-white dark:text-white p-4">Pagamento PIX</h3>
+                      <hr className="border-gray-600 dark:border-gray-600" />
+                    </div>
+
+                    <div className="py-6 px-8 flex flex-col items-center space-y-6">
+                      <div className="bg-white p-4 rounded-lg">
+                        {pixData.qrCodeBase64 ? (
+                          <img 
+                            src={`data:image/png;base64,${pixData.qrCodeBase64}`} 
+                            alt="QR Code PIX" 
+                            className="w-64 h-64"
+                          />
+                        ) : (
+                          <div className="w-64 h-64 flex items-center justify-center bg-gray-200 rounded">
+                            <p className="text-gray-500 text-center px-4">QR Code não disponível</p>
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="w-full">
+                        <label className="block font-semibold mb-2 text-center">Ou copie o código PIX:</label>
+                        <div className="flex gap-2">
+                          <input
+                            type="text"
+                            value={pixData.qrCode || ''}
+                            readOnly
+                            className="flex-1 border rounded px-3 py-2 text-black text-sm"
+                          />
+                          <button
+                            onClick={() => {
+                              navigator.clipboard.writeText(pixData.qrCode || '');
+                              setModalMessage("Código PIX copiado!");
+                              setModalOpen(true);
+                            }}
+                            className="bg-red-700 hover:bg-red-800 text-white font-bold px-4 py-2 rounded"
+                          >
+                            Copiar
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="text-center text-gray-300 text-sm">
+                        <p>Abra o app do seu banco</p>
+                        <p>Escolha pagar via PIX com QR Code ou código</p>
+                        <p>Escaneie ou cole o código acima</p>
+                        {pixData.expirationDate && (
+                          <p className="mt-2 text-yellow-400">
+                            Válido até: {new Date(pixData.expirationDate).toLocaleString('pt-BR')}
+                          </p>
+                        )}
+                      </div>
+
+                      <button
+                        onClick={() => setStage("payment")}
+                        className="text-gray-400 hover:text-white underline"
+                      >
+                        Voltar e escolher outro método
                       </button>
                     </div>
                   </div>
